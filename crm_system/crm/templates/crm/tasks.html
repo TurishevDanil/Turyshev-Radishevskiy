@@ -1,0 +1,10 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+<h1>Задачи</h1>
+<ul>
+    {% for task in tasks %}
+    <li>{{ task.description }} - {{ task.due_date }} - {% if task.completed %}✔{% else %}✘{% endif %}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

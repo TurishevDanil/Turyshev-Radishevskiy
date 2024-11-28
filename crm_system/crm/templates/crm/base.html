@@ -1,0 +1,40 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %} 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM System</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Главная</a></li>
+                <li><a href="{% url 'client_list' %}">Клиенты</a></li>
+                <li><a href="{% url 'deals' %}">Сделки</a></li>
+                <li><a href="{% url 'tasks' %}">Задачи</a></li>
+                {% if user.is_authenticated %}
+                <li>Вошел: {{ user.get_username }}</li>
+                    <li>
+                        <a href="{% url 'logged_out' %}?next={{ request.path }}">Выход</a>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}?next={{ request.path }}">Вход</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <!-- Содержимое страницы -->
+        {% endblock %}
+    </main>
+    <footer>
+        &copy; 2024 CRM System
+    </footer>
+</body>
+</html>

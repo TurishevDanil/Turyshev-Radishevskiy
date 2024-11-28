@@ -1,0 +1,10 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+<h1>Клиенты</h1>
+<ul>
+    {% for client in clients %}
+    <li>{{ client.name }} - {{ client.email }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
