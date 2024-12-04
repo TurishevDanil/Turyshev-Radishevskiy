@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.utils.timezone import now
+    
 # Расширьте пользователя для добавления ролей
 class User(AbstractUser):
     ROLE_CHOICES = (
@@ -22,11 +23,12 @@ class User(AbstractUser):
     
 
 class Client(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    city = models.CharField(max_length=50)
-    manager = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': 'employee'})
+    name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15, null=True, blank=True)
+    address = models.TextField(null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class Deal(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
