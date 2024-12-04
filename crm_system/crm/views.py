@@ -26,3 +26,21 @@ def client_list(request):
     clients = Client.objects.all()
     return render(request, 'crm/client_list.html', {'clients': clients})
 
+# Добавление клиента
+def add_client(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')  # Получить имя
+        email = request.POST.get('email')  # Получить email
+        phone = request.POST.get('phone')  # Получить телефон
+        address = request.POST.get('address')  # Получить адрес
+        Client.objects.create(name=name, email=email, phone=phone, address=address)
+        return redirect('client_list')  # После добавления клиента переход на список клиентов
+    return render(request, 'crm/client_list.html')
+
+# Удаление клиента
+def delete_client(request, client_id):
+    client = get_object_or_404(Client, id=client_id)
+    if request.method == 'POST':
+        client.delete()  # Удалить клиента
+        return redirect('client_list')
+
