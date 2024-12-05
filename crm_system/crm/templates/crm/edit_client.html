@@ -4,25 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактировать клиента</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #555555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .cancel {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #dc3545;
+            font-size: 14px;
+        }
+
+        .cancel:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Редактировать клиента</h1>
     <form method="POST">
         {% csrf_token %}
-        <label for="name">Имя:</label><br>
-        <input type="text" id="name" name="name" value="{{ client.name }}"><br><br>
+        <h1>Редактировать клиента</h1>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" value="{{ client.email }}"><br><br>
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" value="{{ client.name }}" required>
 
-        <label for="phone">Телефон:</label><br>
-        <input type="text" id="phone" name="phone" value="{{ client.phone }}"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ client.email }}" required>
 
-        <label for="address">Адрес:</label><br>
-        <input type="text" id="address" name="address" value="{{ client.address }}"><br><br>
+        <label for="phone">Телефон:</label>
+        <input type="text" id="phone" name="phone" value="{{ client.phone }}" required>
 
-        <button type="submit" style="background-color: green; color: white; padding: 10px 20px;">Сохранить</button>
-        <a href="{% url 'client_list' %}" style="margin-left: 10px; text-decoration: none; color: red;">Отмена</a>
+        <label for="address">Адрес:</label>
+        <input type="text" id="address" name="address" value="{{ client.address }}" required>
+
+        <button type="submit">Сохранить</button>
+        <a href="{% url 'client_list' %}" class="cancel">Отмена</a>
     </form>
 </body>
 </html>

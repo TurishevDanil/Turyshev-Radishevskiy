@@ -4,28 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Добавить клиента</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            font-size: 16px;
+            color: #444;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Добавить нового клиента</h1>
     <form method="POST">
+        <h1>Добавить нового клиента</h1>
         
         {% csrf_token %}
-        <label>Имя:</label><br>
-        <input type="text" name="name" required><br><br>
+        <label>Имя:</label>
+        <input type="text" name="name" required>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <label>Email:</label>
+        <input type="email" name="email" required>
 
-        <label>Телефон:</label><br>
-        <input type="text" name="phone" required><br><br>
+        <label>Телефон:</label>
+        <input type="text" name="phone" required>
 
-        <label>Адрес:</label><br>
-        <textarea name="address" required></textarea><br><br>
+        <label>Адрес:</label>
+        <textarea name="address" required></textarea>
 
         <button type="submit">Добавить</button>
+        <a href="{% url 'client_list' %}">Назад</a>
     </form>
-
-    <br>
-    <a href="{% url 'client_list' %}">Назад</a>
 </body>
 </html>
