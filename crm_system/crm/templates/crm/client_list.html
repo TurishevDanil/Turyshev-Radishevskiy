@@ -1,42 +1,54 @@
-{% extends 'crm/base.html' %}
-
-{% block content %}
-<h1>Клиенты</h1>
-
-<!-- Список клиентов -->
-<ul>
-    {% for client in clients %}
-    <li>
-        <strong>{{ client.name }}</strong> - {{ client.email }}<br>
-        <em>Телефон:</em> {{ client.phone|default:"не указан" }}<br>
-        <em>Адрес:</em> {{ client.address|default:"не указан" }}<br>
-
-        <!-- Кнопка для удаления клиента -->
-        <form action="{% url 'delete_client' client.id %}" method="post" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit">Удалить</button>
-        </form>
-    </li>
-    {% endfor %}
-</ul>
-
-<!-- Форма для добавления нового клиента -->
-<h2>Добавить нового клиента</h2>
-<form action="{% url 'add_client' %}" method="post">
-    {% csrf_token %}
-    <label for="name">Имя:</label>
-    <input type="text" id="name" name="name" required><br>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br>
-    
-    <label for="phone">Телефон:</label>
-    <input type="text" id="phone" name="phone"><br>
-    
-    <label for="address">Адрес:</label>
-    <textarea id="address" name="address"></textarea><br>
-    
-    <button type="submit">Добавить</button>
-</form>
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        button a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Клиенты</h1>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Адрес</th>
+            <th>Действия</th>
+        </tr>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.address }}</td>
+            <td>
+                <button>Удалить</button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Нет клиентов</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <button style="background-color: blue; color: white; padding: 10px 20px;">
+        <a href="{% url 'add_client' %}">Добавить клиента</a>
+    </button>
+</body>
+</html>

@@ -23,24 +23,24 @@ def tasks(request):
     return render(request, 'crm/tasks.html', {'tasks': tasks})
 
 def client_list(request):
-    clients = Client.objects.all()
+    clients = Client.objects.all()  # Получение всех клиентов из базы данных
     return render(request, 'crm/client_list.html', {'clients': clients})
 
-# Добавление клиента
 def add_client(request):
     if request.method == 'POST':
-        name = request.POST.get('name')  # Получить имя
-        email = request.POST.get('email')  # Получить email
-        phone = request.POST.get('phone')  # Получить телефон
-        address = request.POST.get('address')  # Получить адрес
-        Client.objects.create(name=name, email=email, phone=phone, address=address)
-        return redirect('client_list')  # После добавления клиента переход на список клиентов
-    return render(request, 'crm/client_list.html')
+        # Получение данных из формы
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
 
-# Удаление клиента
-def delete_client(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
-    if request.method == 'POST':
-        client.delete()  # Удалить клиента
+        # Сохранение данных
+        Client.objects.create(name=name, email=email, phone=phone, address=address)
+
+        # Перенаправление на список клиентов
         return redirect('client_list')
+
+    return render(request, 'crm/add_client.html')
+
+
 
