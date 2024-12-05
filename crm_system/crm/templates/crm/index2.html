@@ -1,16 +1,19 @@
-<!-- Начальная страница -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRM Система</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       color: #333;
-      background-color: #fff;
+      background-color: #f8f9fa; /* Светлый фон */
       text-align: center;
       padding: 50px 20px;
     }
@@ -33,39 +36,41 @@
 
     .description {
       font-size: 1rem;
-      color: #555;
+      color: #6c757d; /* Светло-серый текст */
       line-height: 1.6;
       max-width: 600px;
       margin: 0 auto 30px auto;
     }
 
-    .button {
-      display: inline-block;
-      padding: 15px 30px;
+    .btn-primary-custom {
       font-size: 1rem;
       font-weight: bold;
-      color: #fff;
-      background-color: #007bff;
-      text-decoration: none;
       border-radius: 5px;
+      padding: 15px 30px;
       transition: background-color 0.3s ease;
     }
 
-    .button:hover {
-      background-color: #0056b3;
+    .btn-primary-custom:hover {
+      background-color: #0056b3 !important;
     }
   </style>
 </head>
 <body>
-  <h4 class="small-header">CRM СИСТЕМА ДЛЯ БИЗНЕСА</h4>
-  <h1 class="main-header">CRM для управления клиентами<br>и продажами</h1>
-  <p class="description">
-    Переведите бизнес-процессы в режим одного окна. CRM позволяет эффективно вести базу клиентов и отслеживать этапы сделок.
-  </p>
-  <a href="/index">
-    <button style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-        Попробовать CRM
-    </button>
-</a>
+  <div class="container text-center">
+    <h4 class="small-header">CRM СИСТЕМА ДЛЯ БИЗНЕСА</h4>
+    <h1 class="main-header">CRM для управления клиентами<br>и продажами</h1>
+    <p class="description">
+      Переведите бизнес-процессы в режим одного окна. CRM позволяет эффективно вести базу клиентов и отслеживать этапы сделок.
+    </p>
+
+    <!-- Кнопка с использованием стилей Bootstrap -->
+    <a href="/index" class="btn btn-primary btn-primary-custom shadow-sm">
+    <!-- <a href="/login" class="btn btn-primary btn-primary-custom shadow-sm"> -->
+      Начать использование
+    </a>
+  </div>
+
+  <!-- Подключение Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

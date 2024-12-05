@@ -3,6 +3,7 @@ from .models import Client, Deal, Task
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client
 from .forms import ClientForm
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'crm/index.html')
@@ -30,12 +31,21 @@ def add_client(request):
     if request.method == 'POST':
         # Получение данных из формы
         name = request.POST.get('name')
+        surname = request.POST.get('surname')  # Новое поле
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
+        birth_date = request.POST.get('birth_date')  # Новое поле
 
         # Сохранение данных
-        Client.objects.create(name=name, email=email, phone=phone, address=address)
+        Client.objects.create(
+            name=name,
+            surname=surname,  # Сохраняем фамилию
+            email=email,
+            phone=phone,
+            address=address,
+            birth_date=birth_date  # Сохраняем дату рождения
+        )
 
         # Перенаправление на список клиентов
         return redirect('client_list')
@@ -54,6 +64,8 @@ def edit_client(request, client_id):
 
     if request.method == 'POST':
         client.name = request.POST.get('name')
+        client.surname = request.POST.get('surname')  # Фамилия
+        client.birth_date = request.POST.get('birth_date')  # Дата рождения
         client.email = request.POST.get('email')
         client.phone = request.POST.get('phone')
         client.address = request.POST.get('address')
@@ -62,6 +74,3 @@ def edit_client(request, client_id):
 
     # Если GET-запрос, передаем данные клиента в форму для отображения
     return render(request, 'crm/edit_client.html', {'client': client})
-
-
-

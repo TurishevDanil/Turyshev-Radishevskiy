@@ -1,6 +1,193 @@
 {% extends 'crm/base.html' %}
 
 {% block content %}
-<h1>Добро пожаловать в CRM!</h1>
-<p>Это ваша система управления клиентами. Выберите действие из меню.</p>
+<style>
+/* Стиль для контейнера */
+.content-wrapper {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f9f9f9; /* Светло-серый фон для контейнера */
+    border-radius: 12px; /* Закругленные углы */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Тень */
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Стиль заголовка */
+.content-wrapper h1 {
+    color: #0a73ff; /* Голубой цвет текста */
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Стиль абзаца */
+.content-wrapper p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #555; /* Темно-серый цвет текста */
+    margin-bottom: 20px;
+}
+
+/* Кнопки действий */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Расстояние между кнопками */
+}
+
+.action-buttons a {
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    background-color: #0a73ff; /* Основной голубой цвет */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons a:hover {
+    background-color: #085bbf; /* Темнее при наведении */
+    transform: scale(1.05); /* Легкая анимация увеличения */
+}
+
+.action-buttons a:active {
+    background-color: #064a99; /* Темнее при нажатии */
+    transform: scale(0.95); /* Легкое уменьшение */
+}
+
+/* Стиль для блока новостей */
+.news-section {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.news-section h2 {
+    font-size: 1.8em;
+    color: #333;
+    border-bottom: 3px solid #0a73ff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.news-item {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.news-item h3 {
+    font-size: 1.5em;
+    color: #0a73ff;
+}
+
+.news-item p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Стиль для блока FAQ */
+.faq-section {
+    margin-top: 50px;
+    background-color: #eef6ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+}
+
+.faq-item h3 {
+    font-size: 1.3em;
+    color: #0a73ff;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.faq-item p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Стиль для блока контактов */
+.contacts-section {
+    margin-top: 50px;
+    text-align: left;
+}
+
+.contacts-section h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contacts-item p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+}
+</style>
+
+<!-- Главный контент страницы -->
+<div class="content-wrapper">
+    <h1>Добро пожаловать в CRM!</h1>
+    <p>Это ваша система управления клиентами, которая помогает вам эффективно организовывать работу, улучшать взаимодействие с клиентами и повышать продуктивность.</p>
+    <p>Выберите одно из доступных действий, чтобы начать работу.</p>
+    
+    
+    <!-- Раздел новостей -->
+    <div class="news-section">
+        <h2>Последние новости</h2>
+        <div class="news-item">
+            <h3>Обновление системы CRM</h3>
+            <p>На этой неделе была выпущена новая версия CRM с улучшением пользовательского интерфейса и добавлением новых функций.</p>
+        </div>
+        <div class="news-item">
+            <h3>Расширение базы клиентов</h3>
+            <p>Мы рады сообщить, что наша база данных теперь поддерживает интеграцию с облачными сервисами для хранения больших объемов данных.</p>
+        </div>
+        <div class="news-item">
+            <h3>Скидки на тарифы Pro</h3>
+
+            <p>С 15 по 30 октября действует скидка на тариф Pro. Не упустите возможность!</p>
+        </div>
+    </div>
+    <!-- Раздел FAQ -->
+    <div class="faq-section">
+        <h2>FAQ (Часто задаваемые вопросы)</h2>
+        <div class="faq-item">
+            <h3>Как добавить нового клиента?</h3>
+            <p>Для добавления нового клиента перейдите в раздел Клиенты и нажмите кнопку "Добавить клиента".</p>
+        </div>
+        <div class="faq-item">
+            <h3>Можно ли интегрировать CRM с другими платформами?</h3>
+            <p>Да, наша CRM поддерживает интеграции с популярными платформами, такими как Google Sheets, Office365 и другими.</p>
+        </div>
+    </div>
+
+    <!-- Раздел контактов -->
+    <div class="contacts-section">
+        <h2>Контакты</h2>
+        <div class="contacts-item">
+            <p><strong>Email:</strong> support@crm.com</p>
+            <p><strong>Телефон:</strong> +1 (123) 456-7890</p>
+            <p><strong>Адрес:</strong> г. Москва, ул. Примерная, 5</p>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,3 +1,6 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,104 +15,120 @@
             padding: 0;
             line-height: 1.6;
         }
-
+    
+        /* Контейнер */
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
+            max-width: 90%;
+            margin: 40px auto;
             padding: 20px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Улучшили эффект */
+            position: relative; /* Для точного расположения кнопки */
+            overflow: hidden; /* Убирает переполнение внутри */
         }
-
+    
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
         }
-
+    
+        /* Таблица */
         table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+            width: 100%; /* Заполнение всей ширины контейнера */
+            border-collapse: collapse; /* Убираем промежутки между ячейками */
+            margin-bottom: 60px; /* Оставляем место для кнопки */
         }
-
+    
         table th, table td {
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #ddd; /* Линии между ячейками */
             text-align: left;
+            box-sizing: border-box; /* Убираем ошибки расчета ширины */
         }
-
+    
         table th {
             background: #007bff;
             color: #fff;
             text-transform: uppercase;
         }
-
+    
         table tr:nth-child(odd) {
             background-color: #f9f9f9;
         }
-
+    
         table tbody tr:hover {
             background-color: #f1f1f1;
         }
-
+    
+        /* Увеличение ширины для поля "Дата рождения" и улучшенный скроллинг */
+        th:nth-child(3), td:nth-child(3) {
+            min-width: 120px; /* Сократили минимальную ширину */
+            text-align: center;
+            word-wrap: break-word; /* Перенос текста внутри ячейки */
+        }
+    
+        th, td {
+            text-align: center; /* Улучшаем выравнивание всех ячеек */
+        }
+    
+        /* Расположение кнопки добавления */
+        .add-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+    
+        .add-btn:hover {
+            background-color: #218838; /* Эффект затемнения при наведении */
+        }
+    
+        /* Кнопки управления */
         .actions {
             display: flex;
             gap: 10px;
+            justify-content: center; /* Центровка блока действий */
         }
-
-        button, a {
-            padding: 8px 15px;
-            text-decoration: none;
+    
+        .edit-btn {
+            background-color: #ffc107; 
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
             border-radius: 5px;
-            font-size: 14px;
+            font-weight: bold;
             cursor: pointer;
         }
-
-        .add-btn {
-            display: inline-block;
-            background-color: #28a745;
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .edit-btn {
-            background-color: #ffc107;
-    color: #fff; /* Белый текст */
-    font-size: 16px; /* Размер текста */
-    width: 135px; /* Увеличиваем ширину */
-    height: 35px; /* Увеличиваем высоту */
-    border: none; /* Убираем границы */
-    border-radius: 5px; /* Закругленные углы (если нужно) */
-    cursor: pointer; /* Указываем на взаимодействие */
-    text-align: center; /* Выравниваем текст по центру */
-    font-weight: bold;
-        }
-
+    
         .delete-btn {
-    background-color: #dc3545; /* Красный фон */
-    color: #fff; /* Белый текст */
-    font-size: 16px; /* Размер текста */
-    width: 150px; /* Увеличиваем ширину */
-    height: 50px; /* Увеличиваем высоту */
-    border: none; /* Убираем границы */
-    border-radius: 5px; /* Закругленные углы (если нужно) */
-    cursor: pointer; /* Указываем на взаимодействие */
-    text-align: center; /* Выравниваем текст по центру */
-    font-weight: bold;
-}
-
-        button:hover, .add-btn:hover, a.edit-btn:hover, a.delete-btn:hover {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    
+        /* Эффекты для кнопок */
+        button:hover, .edit-btn:hover, .delete-btn:hover {
             opacity: 0.8;
         }
-
-        a.add-btn {
-            display: inline-block;
-            margin-bottom: 20px;
+    
+        footer {
             text-align: center;
+            margin-top: 20px;
+            color: #666;
         }
     </style>
 </head>
@@ -119,13 +138,15 @@
         
         <!-- Кнопка "Добавить клиента" -->
         <a href="{% url 'add_client' %}" class="add-btn">+ Добавить клиента</a>
-
-        <!-- Таблица клиентов -->
+        
+        <!-- Таблица со списком клиентов -->
         <table>
             <thead>
                 <tr>
                     <th>Имя</th>
-                    <th>Email</th>
+                    <th>Фамилия</th>
+                    <th>Дата рождения</th>
+                    <th>Электронная почта</th>
                     <th>Телефон</th>
                     <th>Адрес</th>
                     <th>Действия</th>
@@ -135,24 +156,18 @@
                 {% for client in clients %}
                 <tr>
                     <td>{{ client.name }}</td>
+                    <td>{{ client.surname }}</td>
+                    <td>{{ client.birth_date }}</td>
                     <td>{{ client.email }}</td>
                     <td>{{ client.phone }}</td>
                     <td>{{ client.address }}</td>
                     <td class="actions">
-                        <!-- Кнопка редактирования -->
+                        <!-- Кнопка "Редактировать" -->
                         <a href="{% url 'edit_client' client.id %}" class="edit-btn">Редактировать</a>
                         
-                        <!-- Кнопка удаления -->
-                        <form action="{% url 'delete_client' client.id %}" method="POST" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="delete-btn">Удалить</button>
-                        </form>
+                        <!-- Кнопка "Удалить" -->
+                        <a href="{% url 'delete_client' client.id %}" class="delete-btn">Удалить</a>
                     </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" style="text-align: center; color: #888;">Нет клиентов</td>
-                    
                 </tr>
                 {% endfor %}
             </tbody>
@@ -160,3 +175,4 @@
     </div>
 </body>
 </html>
+{% endblock %}

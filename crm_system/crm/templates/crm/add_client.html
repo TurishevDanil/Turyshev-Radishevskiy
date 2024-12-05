@@ -78,21 +78,28 @@
 <body>
     <form method="POST">
         <h1>Добавить нового клиента</h1>
-        
         {% csrf_token %}
+        
         <label>Имя:</label>
         <input type="text" name="name" required>
-
-        <label>Email:</label>
-        <input type="email" name="email" required>
-
+        
+        <label>Фамилия:</label>
+        <input type="text" name="surname" required>
+        
+        <label>Дата рождения:</label>
+        <input type="date" name="birth_date" required>
+        
+        <label>Электронная почта:</label>
+        <input type="email" name="email" placeholder="vlad123@gmail.com" required>
+        
         <label>Телефон:</label>
-        <input type="text" name="phone" required>
-
+        <input type="text" name="phone" placeholder="+7 999 999-99-99" required>
+        
         <label>Адрес:</label>
         <textarea name="address" required></textarea>
-
+        
         <button type="submit">Добавить</button>
+        
         <a href="{% url 'client_list' %}">Назад</a>
     </form>
 </body>

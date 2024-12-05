@@ -12,11 +12,10 @@ urlpatterns = [
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-    # Убедитесь, что логин и логаут находятся последними
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logged_out/', auth_views.LogoutView.as_view(), name='logged_out'),
     path('clients/', views.client_list, name='client_list'),
     path('clients/add/', views.add_client, name='add_client'),
     path('clients/delete/<int:client_id>/', views.delete_client, name='delete_client'),
-    path('clients/edit/<int:client_id>/', views.edit_client, name='edit_client'),
+    path('clients/edit/<int:client_id>/', views.edit_client, name='edit_client'), 
 ]

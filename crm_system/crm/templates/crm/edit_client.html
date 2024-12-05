@@ -90,6 +90,12 @@
         <label for="name">Имя:</label>
         <input type="text" id="name" name="name" value="{{ client.name }}" required>
 
+        <label for="surname">Фамилия:</label> <!-- Новое поле -->
+        <input type="text" id="surname" name="surname" value="{{ client.surname }}" required>
+
+        <label for="birth_date">Дата рождения:</label> <!-- Новое поле -->
+        <input type="date" id="birth_date" name="birth_date" value="{{ client.birth_date|date:"Y-m-d" }}" required>
+
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="{{ client.email }}" required>
 

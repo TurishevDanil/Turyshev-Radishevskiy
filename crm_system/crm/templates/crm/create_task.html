@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать задачу</title>
+</head>
+<body>
+    <h1>Создать новую задачу</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description" required></textarea>
+        <br>
+        <label for="due_date">Срок выполнения:</label>
+        <input id="due_date" type="date" name="due_date" required>
+        <br>
+        <label for="completed">Завершена:</label>
+        <input id="completed" type="checkbox" name="completed">
+        <br><br>
+        <button type="submit" style="padding: 5px 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">Создать</button>
+    </form>
+    <br>
+    <a href="{% url 'tasks' %}" style="text-decoration: none; color: #007bff;">Вернуться к списку задач</a>
+</body>
+</html>
