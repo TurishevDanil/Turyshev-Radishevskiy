@@ -3,52 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Клиенты</title>
+    <title>Список клиентов</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
         }
-        table th, td {
-            border: 1px solid black;
-            padding: 8px;
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
             text-align: left;
         }
-        button a {
+
+        table th {
+            background: #007bff;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        table tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        button, a {
+            padding: 8px 15px;
             text-decoration: none;
-            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .add-btn {
+            display: inline-block;
+            background-color: #28a745;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+    color: #fff; /* Белый текст */
+    font-size: 16px; /* Размер текста */
+    width: 135px; /* Увеличиваем ширину */
+    height: 35px; /* Увеличиваем высоту */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Закругленные углы (если нужно) */
+    cursor: pointer; /* Указываем на взаимодействие */
+    text-align: center; /* Выравниваем текст по центру */
+    font-weight: bold;
+        }
+
+        .delete-btn {
+    background-color: #dc3545; /* Красный фон */
+    color: #fff; /* Белый текст */
+    font-size: 16px; /* Размер текста */
+    width: 150px; /* Увеличиваем ширину */
+    height: 50px; /* Увеличиваем высоту */
+    border: none; /* Убираем границы */
+    border-radius: 5px; /* Закругленные углы (если нужно) */
+    cursor: pointer; /* Указываем на взаимодействие */
+    text-align: center; /* Выравниваем текст по центру */
+    font-weight: bold;
+}
+
+        button:hover, .add-btn:hover, a.edit-btn:hover, a.delete-btn:hover {
+            opacity: 0.8;
+        }
+
+        a.add-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Клиенты</h1>
-    <table>
-        <tr>
-            <th>Имя</th>
-            <th>Email</th>
-            <th>Телефон</th>
-            <th>Адрес</th>
-            <th>Действия</th>
-        </tr>
-        {% for client in clients %}
-        <tr>
-            <td>{{ client.name }}</td>
-            <td>{{ client.email }}</td>
-            <td>{{ client.phone }}</td>
-            <td>{{ client.address }}</td>
-            <td>
-                <button>Удалить</button>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5">Нет клиентов</td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <button style="background-color: blue; color: white; padding: 10px 20px;">
-        <a href="{% url 'add_client' %}">Добавить клиента</a>
-    </button>
+    <div class="container">
+        <h1>Список клиентов</h1>
+        
+        <!-- Кнопка "Добавить клиента" -->
+        <a href="{% url 'add_client' %}" class="add-btn">+ Добавить клиента</a>
+
+        <!-- Таблица клиентов -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Адрес</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                <tr>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone }}</td>
+                    <td>{{ client.address }}</td>
+                    <td class="actions">
+                        <!-- Кнопка редактирования -->
+                        <a href="{% url 'edit_client' client.id %}" class="edit-btn">Редактировать</a>
+                        
+                        <!-- Кнопка удаления -->
+                        <form action="{% url 'delete_client' client.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #888;">Нет клиентов</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

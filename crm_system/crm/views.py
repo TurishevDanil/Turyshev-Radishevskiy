@@ -41,6 +41,27 @@ def add_client(request):
         return redirect('client_list')
 
     return render(request, 'crm/add_client.html')
+    
+def delete_client(request, client_id):
+    # Получаем клиента по ID, или возвращаем 404, если его нет
+    client = get_object_or_404(Client, id=client_id)
+    client.delete()
+    return redirect('client_list')
+
+def edit_client(request, client_id):
+    # Получаем данные клиента по ID или возвращаем 404
+    client = get_object_or_404(Client, id=client_id)
+
+    if request.method == 'POST':
+        client.name = request.POST.get('name')
+        client.email = request.POST.get('email')
+        client.phone = request.POST.get('phone')
+        client.address = request.POST.get('address')
+        client.save()  # Сохраняем изменения
+        return redirect('client_list')  # Переход к списку клиентов
+
+    # Если GET-запрос, передаем данные клиента в форму для отображения
+    return render(request, 'crm/edit_client.html', {'client': client})
 
 
 
