@@ -11,69 +11,103 @@
             margin: 0;
             padding: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Выравнивание элементов по верху */
             justify-content: center;
-            height: 100vh;
+            height: 100vh; /* Полная высота экрана */
         }
-
+    
         h1 {
             text-align: center;
             color: #555;
+            margin-bottom: 20px; /* Отступ после заголовка */
+            font-size: 24px;
         }
-
+    
         form {
             background: #fff;
-            padding: 20px;
+            padding: 20px 20px; /* Одинаковый внутренний отступ со всех сторон */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
-            margin: auto;
+            max-width: 420px;
+            margin: 50px auto; /* Увеличен внешний отступ сверху */
         }
-
+    
         label {
-            font-size: 16px;
+            font-size: 15px; /* Размер шрифта для баланса */
             color: #444;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px; /* Отступ между label и полем ввода */
+            font-weight: bold;
         }
-
+    
         input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
+            width: 100%; /* Поля занимают всю ширину */
+            padding: 10px; /* Внутренний отступ от текста */
+            margin-bottom: 20px; /* Отступ между полями */
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
+            box-sizing: border-box; /* Учитываем padding и border в ширине */
+            background-color: #f9f9f9;
         }
-
+    
+        textarea {
+            resize: vertical; /* Позволяет менять размер только по высоте */
+            min-height: 60px; /* Уменьшенная минимальная высота текстового поля */
+            max-height: 200px; /* Максимальная высота остается ограниченной */
+        }
+    
         button {
             background: #28a745;
-            color: white;
+            color: #fff;
             font-size: 16px;
-            padding: 10px 20px;
+            padding: 12px; /* Внутренний отступ для кнопки */
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            margin-top: 10px; /* Отступ сверху кнопки */
+            width: 100%; /* Кнопка занимает всю ширину формы */
+            font-weight: bold;
         }
-
+    
         button:hover {
             background: #218838;
         }
-
+    
         a {
             display: block;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 15px; /* Отступ сверху от кнопки */
             color: #007bff;
+            font-size: 14px;
             text-decoration: none;
         }
-
+    
         a:hover {
             text-decoration: underline;
         }
+    
+        /* Адаптивный подход для мобильных устройств */
+        @media (max-width: 480px) {
+            form {
+                padding: 15px; /* Уменьшенный padding на мобильных */
+            }
+    
+            button {
+                font-size: 15px; /* Чуть меньший размер кнопки */
+            }
+    
+            input, textarea {
+                font-size: 13px; /* Меньший размер текста полей */
+            }
+    
+            textarea {
+                min-height: 50px; /* Еще меньше высота на мобильных */
+            }
+        }
     </style>
+    
 </head>
 <body>
     <form method="POST">

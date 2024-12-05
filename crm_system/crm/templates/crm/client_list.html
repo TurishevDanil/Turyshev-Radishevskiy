@@ -23,112 +23,103 @@
             padding: 20px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Улучшили эффект */
-            position: relative; /* Для точного расположения кнопки */
-            overflow: hidden; /* Убирает переполнение внутри */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
-    
+
         h1 {
             text-align: center;
             color: #333;
             margin-bottom: 20px;
         }
-    
-        /* Таблица */
+
         table {
-            width: 100%; /* Заполнение всей ширины контейнера */
-            border-collapse: collapse; /* Убираем промежутки между ячейками */
-            margin-bottom: 60px; /* Оставляем место для кнопки */
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 60px;
+            border: 1px solid #ddd; /* Явная рамка вокруг таблицы */
         }
-    
+
         table th, table td {
             padding: 12px 15px;
-            border: 1px solid #ddd; /* Линии между ячейками */
-            text-align: left;
-            box-sizing: border-box; /* Убираем ошибки расчета ширины */
+            border: 1px solid #ddd; /* Границы внутри таблицы */
+            box-sizing: border-box; 
+            text-align: center; /* Выровнено по центру */
+            vertical-align: middle; /* Горизонтально центрируем */
         }
-    
+
         table th {
             background: #007bff;
             color: #fff;
             text-transform: uppercase;
         }
-    
+
         table tr:nth-child(odd) {
-            background-color: #f9f9f9;
+            background-color: #f9f9f9; /* Фон для нечётных строк */
         }
-    
+
         table tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f1f1f1; /* Подсветка строки при наведении */
         }
-    
-        /* Увеличение ширины для поля "Дата рождения" и улучшенный скроллинг */
-        th:nth-child(3), td:nth-child(3) {
-            min-width: 120px; /* Сократили минимальную ширину */
-            text-align: center;
-            word-wrap: break-word; /* Перенос текста внутри ячейки */
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            white-space: nowrap;
         }
-    
-        th, td {
-            text-align: center; /* Улучшаем выравнивание всех ячеек */
+
+        .edit-btn, .delete-btn {
+            padding: 8px 16px; /* Кнопки действий */
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
         }
-    
-        /* Расположение кнопки добавления */
+
+        .edit-btn {
+            background-color: #ffc107;
+        }
+
+        .edit-btn:hover {
+            background-color: #e0a800;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
         .add-btn {
             position: absolute;
             bottom: 20px;
             left: 20px;
             padding: 12px 25px;
             background-color: #28a745;
-            color: #fff;
+            color: white;
             font-size: 16px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
-            text-align: center;
         }
-    
+
         .add-btn:hover {
-            background-color: #218838; /* Эффект затемнения при наведении */
+            background-color: #218838;
         }
-    
-        /* Кнопки управления */
-        .actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center; /* Центровка блока действий */
-        }
-    
-        .edit-btn {
-            background-color: #ffc107; 
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    
-        .delete-btn {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    
-        /* Эффекты для кнопок */
-        button:hover, .edit-btn:hover, .delete-btn:hover {
-            opacity: 0.8;
-        }
-    
-        footer {
+
+        .no-tasks {
             text-align: center;
-            margin-top: 20px;
+            font-size: 16px;
             color: #666;
+            padding: 20px 0;
         }
     </style>
 </head>
@@ -157,7 +148,7 @@
                 <tr>
                     <td>{{ client.name }}</td>
                     <td>{{ client.surname }}</td>
-                    <td>{{ client.birth_date }}</td>
+                    <td>{{ client.birth_date|date:"d.m.Y" }}</td>
                     <td>{{ client.email }}</td>
                     <td>{{ client.phone }}</td>
                     <td>{{ client.address }}</td>

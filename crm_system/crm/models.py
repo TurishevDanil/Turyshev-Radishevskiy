@@ -40,6 +40,10 @@ class Deal(models.Model):
 
 
 class Task(models.Model):
-    description = models.TextField()
-    due_date = models.DateField()
-    completed = models.BooleanField(default=False)
+    title = models.CharField(default="", max_length=200, verbose_name="Название задачи")
+    description = models.TextField(default="", blank=True, verbose_name="Описание")
+    deadline = models.DateField( verbose_name="Срок выполнения")
+    is_completed = models.BooleanField( verbose_name="Выполнена")
+
+    def __str__(self):
+        return self.title

@@ -1,0 +1,155 @@
+{% extends 'crm/base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список задач</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ddd; /* Граница вокруг таблицы */
+        }
+
+        thead th {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px;
+            border: 1px solid #ddd; /* Разделение полей-заголовков */
+        }
+
+        tbody td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd; /* Разделение полей в строках */
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9; /* Светлый фон для чётных строк */
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1; /* Подсветка строки при наведении */
+        }
+
+        /* Изменение фона для задач со статусом "Не выполнено" */
+        tbody .not-completed {
+            background-color: #f8d7da;  /* Тёмно-розовый фон */
+            color: #842029;             /* Тёмный текст */
+        }
+
+        .btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-success {
+            font-weight: bold;
+            background-color: #28a745;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .no-tasks {
+            text-align: center;
+            color: #6c757d;
+            font-size: 16px;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Список задач</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Срок выполнения</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in task %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.deadline|date:"d.m.Y" }}</td>
+                    <td>
+                        {% if task.is_completed %}
+                        Выполнено
+                        {% else %}
+                        Не выполнено
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'edit_task' task.id %}" class="btn btn-warning btn-sm">Редактировать</a>
+                        <a href="{% url 'delete_task' task.id %}" onclick="return confirm('Вы уверены?');" class="btn btn-danger btn-sm">Удалить</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-tasks">Нет задач</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add_task' %}" class="btn btn-success mt-3">+ Создать задачу</a>
+    </div>
+</body>
+</html>
+{% endblock %}
