@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить клиента</title>
+    <title>CRM system</title>
     <style>
-        body {
+        body 
+        {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
@@ -17,10 +18,10 @@
         }
     
         h1 {
-            text-align: center;
-            color: #555;
-            margin-bottom: 20px; /* Отступ после заголовка */
+            margin: 0 0 20px;
             font-size: 24px;
+            color: #333;
+            text-align: center;
         }
     
         form {
@@ -111,8 +112,8 @@
 </head>
 <body>
     <form method="POST">
-        <h1>Добавить нового клиента</h1>
         {% csrf_token %}
+        <h1>Добавить нового клиента</h1>
         
         <label>Имя:</label>
         <input type="text" name="name" required>

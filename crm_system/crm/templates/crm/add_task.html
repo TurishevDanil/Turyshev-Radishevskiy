@@ -3,13 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Добавить задачу</title>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Добавить задачу</title>
+    <title>CRM system</title>
         <style>
             /* Основные стили для страницы */
             body {
@@ -22,14 +16,27 @@
                 justify-content: center; /* Центрируем по горизонтали */
                 height: 100vh; /* Высота экрана */
             }
+                    /* Основной контейнер */
+        .container {
+            max-width: 600px; /* Ограничение ширины контейнера */
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto; /* Центрирование контейнера */
+            padding: 20px;
+            display: flex; /* Flexbox для выравнивания содержимого */
+            flex-direction: column; /* Содержимое в колонку */
+            align-items: center; /* Центрирование по горизонтали */
+            justify-content: center; /* Центрирование по вертикали */
+            height: 300px; /* Высота контейнера */
+        }
     
-            /* Стили заголовков */
-            h1 {
-                text-align: center;
-                color: #555;
-                margin-bottom: 25px; /* Отступ под заголовком */
-                font-size: 28px; /* Размер заголовка */
-            }
+        h1 {
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
     
             /* Стили формы */
             form {
@@ -42,12 +49,12 @@
             }
     
             label {
-                font-size: 16px; /* Размер текста */
-                color: #444;
-                display: block;
-                margin-bottom: 10px; /* Отступ */
-                font-weight: bold;
-            }
+            font-size: 15px; /* Размер шрифта для баланса */
+            color: #444;
+            display: block;
+            margin-bottom: 8px; /* Отступ между label и полем ввода */
+            font-weight: bold;
+        }
     
             /* Стили для текстовых полей */
             input, textarea {
@@ -101,46 +108,47 @@
             }
     
             button:hover {
-                background: #218838; /* Цвет при наведении */
-            }
-    
-            /* Ссылки */
-            a {
-                display: block;
-                text-align: center;
-                margin-top: 20px; /* Отступ сверху */
-                color: #007bff;
-                font-size: 16px; /* Размер текста */
-                text-decoration: none; /* Убираем подчеркивание */
-                font-weight: bold; /* Жирный текст */
-            }
-    
-            a:hover {
-                text-decoration: underline; /* Подчеркивание при наведении */
+            background: #218838;
         }
-
-        /* Адаптивность для мобильных устройств */
+    
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px; /* Отступ сверху от кнопки */
+            color: #007bff;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    
+        a:hover {
+            text-decoration: underline;
+        }
+    
+        /* Адаптивный подход для мобильных устройств */
         @media (max-width: 480px) {
             form {
-                padding: 20px; /* Уменьшенный padding */
+                padding: 15px; /* Уменьшенный padding на мобильных */
             }
-
+    
             button {
-                font-size: 16px; 
-                padding: 12px;
+                font-size: 15px; /* Чуть меньший размер кнопки */
             }
-
+    
             input, textarea {
-                font-size: 14px; 
+                font-size: 13px; /* Меньший размер текста полей */
+            }
+    
+            textarea {
+                min-height: 50px; /* Еще меньше высота на мобильных */
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Добавить задачу</h1>
         <form method="POST">
             {% csrf_token %}
+            <h1>Создать задачу</h1>
             <label for="task-title">Название</label>
             <input type="text" id="task-title" name="task-title" required>
 

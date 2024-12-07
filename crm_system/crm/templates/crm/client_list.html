@@ -26,6 +26,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+            padding-bottom: 30px;
         }
 
         h1 {
@@ -63,14 +64,33 @@
             background-color: #f1f1f1; /* Подсветка строки при наведении */
         }
         
-        .actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            white-space: nowrap;
-        }
 
-        .edit-btn, .delete-btn {
+        .btn.btn-success.mt-3 {
+    position: absolute; /* Абсолютное позиционирование относительно контейнера */
+    bottom: 10px; /* Отступ снизу */
+    left: 20px; /* Отступ слева */
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    display: inline-block;
+    bottom: 20px
+}
+
+.btn.btn-success.mt-3:hover {
+    background-color: #218838;
+    box-shadow: 0 0 1px 1px #2fb54c; /* Создаем свечение */
+    transform: scale(1.01); /* Увеличиваем кнопку немного */
+}
+
+
+
+.btn.btn-warning.btn-sm, .btn.btn-danger.btn-sm {
             padding: 8px 16px; /* Кнопки действий */
             border: none;
             border-radius: 5px;
@@ -80,47 +100,28 @@
             text-decoration: none;
             display: inline-block;
         }
-
-        .edit-btn {
+        .btn.btn-warning.btn-sm {
             background-color: #ffc107;
         }
 
-        .edit-btn:hover {
+        .btn.btn-warning.btn-sm:hover {
             background-color: #e0a800;
+            box-shadow: 0 0 3px 1px #ffc929; /* Создаем свечение */
+            transform: scale(1.01); /* Увеличиваем кнопку немного */
         }
 
-        .delete-btn {
-            background-color: #dc3545;
+        .btn.btn-danger.btn-sm {
+            background-color: #ad1c2b;
         }
 
-        .delete-btn:hover {
-            background-color: #c82333;
+        .btn.btn-danger.btn-sm:hover {
+            background-color: #840814;
+            box-shadow: 0 0 3px 1px #d63343; /* Создаем свечение */
+            transform: scale(1.01); /* Увеличиваем кнопку немного */
         }
 
-        .add-btn {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            padding: 12px 25px;
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-        }
+        
 
-        .add-btn:hover {
-            background-color: #218838;
-        }
-
-        .no-tasks {
-            text-align: center;
-            font-size: 16px;
-            color: #666;
-            padding: 20px 0;
-        }
     </style>
 </head>
 <body>
@@ -128,7 +129,7 @@
         <h1>Список клиентов</h1>
         
         <!-- Кнопка "Добавить клиента" -->
-        <a href="{% url 'add_client' %}" class="add-btn">+ Добавить клиента</a>
+        <a href="{% url 'add_client' %}" class="btn btn-success mt-3">+ Добавить клиента</a>
         
         <!-- Таблица со списком клиентов -->
         <table>
@@ -152,12 +153,12 @@
                     <td>{{ client.email }}</td>
                     <td>{{ client.phone }}</td>
                     <td>{{ client.address }}</td>
-                    <td class="actions">
+                    <td>
                         <!-- Кнопка "Редактировать" -->
-                        <a href="{% url 'edit_client' client.id %}" class="edit-btn">Редактировать</a>
+                        <a href="{% url 'edit_client' client.id %}" class="btn btn-warning btn-sm">Редактировать</a>
                         
                         <!-- Кнопка "Удалить" -->
-                        <a href="{% url 'delete_client' client.id %}" class="delete-btn">Удалить</a>
+                        <a href="{% url 'delete_client' client.id %}" onclick="return confirm('Вы уверены?');"class="btn btn-danger btn-sm">Удалить</a>
                     </td>
                 </tr>
                 {% endfor %}
