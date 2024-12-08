@@ -29,14 +29,15 @@ def add_task(request):
         title = request.POST.get('task-title')
         description = request.POST.get('task-desc', '')
         deadline = request.POST.get('task-deadline')
-        is_completed = request.POST.get('task-done') == 'on'
+        is_completed = request.POST.get('is_completed') == 'on'
         Task.objects.create(
             title=title,
             description=description,
             deadline=deadline,
             is_completed=is_completed
         )
-        return redirect('add_task')
+        return redirect('task')
+    
     return render(request, 'crm/add_task.html')
 
 def edit_task(request, task_id):
@@ -58,6 +59,7 @@ def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     task.delete()
     return redirect('task')  # Перенаправление на общий список задач
+    
 
 
 def client_list(request):

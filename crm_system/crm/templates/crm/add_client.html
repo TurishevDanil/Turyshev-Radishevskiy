@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM system</title>
     <style>
-        body 
-        {
+        
+        body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            display: flex;
-            align-items: flex-start; /* Выравнивание элементов по верху */
-            justify-content: center;
-            height: 100vh; /* Полная высота экрана */
+            display: flex; /* Используем flexbox */
+            align-items: center; /* Центрируем по вертикали */
+            justify-content: center; /* Центрируем по горизонтали */
+            height: 100vh; /* Высота экрана */
+            }
+        .container {
+            max-width: 600px; /* Ограничение ширины контейнера */
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 50px auto; /* Центрирование контейнера */
+            padding: 20px;
+            display: flex; /* Flexbox для выравнивания содержимого */
+            flex-direction: column; /* Содержимое в колонку */
+            align-items: center; /* Центрирование по горизонтали */
+            justify-content: center; /* Центрирование по вертикали */
+            height: 300px; /* Высота контейнера */
         }
     
         h1 {
@@ -58,23 +71,60 @@
             min-height: 60px; /* Уменьшенная минимальная высота текстового поля */
             max-height: 200px; /* Максимальная высота остается ограниченной */
         }
-    
-        button {
-            background: #28a745;
+/* Контейнер для кнопок */
+.buttons-container {
+             position: fixed; /* Контейнер фиксируется на экране */
+            bottom: 20px; /* Отступ от нижней границы экрана */
+            right: 20px; /* Отступ от правой границы экрана */
+            display: flex; /* Flexbox для горизонтального выравнивания кнопок */
+            gap: 10px; /* Расстояние между кнопками */
+            z-index: 100; /* Чтобы кнопки были поверх других элементов */
+        }
+        /* Стиль кнопки "Добавить" */
+        .btn_add {
+            width: 120px; /* Фиксированная ширина кнопок */
+            height: 40px; /* Фиксированная высота кнопок */
+            background: #28a745; /* Зеленый цвет */
             color: #fff;
-            font-size: 16px;
-            padding: 12px; /* Внутренний отступ для кнопки */
+            font-size: 16px; /* Уменьшаем размер шрифта */
+            padding: 10px 20px; /* Уменьшаем отступы */
             border: none;
-            border-radius: 5px;
+            border-radius: 6px; /* Уменьшаем радиус углов */
             cursor: pointer;
-            margin-top: 10px; /* Отступ сверху кнопки */
-            width: 100%; /* Кнопка занимает всю ширину формы */
             font-weight: bold;
+            width: auto; /* Ширина уменьшена до авто */
+            margin-left: 175px;
+            justify-content: flex-end; /* Прижимаем кнопки вправо */
         }
-    
-        button:hover {
+            
+        .btn_add:hover {
             background: #218838;
+            box-shadow: 0 0 1px 1px #2fb54c;
+            transform: scale(1.01);
         }
+        /* Стиль кнопки-ссылки "Назад" */
+        .back-btn {
+            background: #dc3545; /* Красный цвет */
+            width: 120px;
+            color: #fff;
+            font-size: 16px; /* Уменьшаем размер шрифта */
+            padding: 10px 20px; /* Уменьшаем отступы */
+            border: none;
+            border-radius: 6px; /* Уменьшаем радиус углов */
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            justify-content: flex-end; /* Прижимаем кнопки вправо */
+
+        }
+
+        .back-btn:hover {
+            background: #c82333;
+            box-shadow: 0 0 1px 1px #d9534f;
+            transform: scale(1.01);
+        }
+
     
         a {
             display: block;
@@ -133,9 +183,9 @@
         <label>Адрес:</label>
         <textarea name="address" required></textarea>
         
-        <button type="submit">Добавить</button>
+        <button class="btn_add"type="submit">Добавить</button>
         
-        <a href="{% url 'client_list' %}">Назад</a>
+        <button type="button" onclick="window.history.back();" class="back-btn">Назад</button>
     </form>
 </body>
 </html>
