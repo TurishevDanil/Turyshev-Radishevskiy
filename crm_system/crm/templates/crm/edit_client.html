@@ -52,33 +52,59 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
         }
 
-        button {
-            width: 100%;
-            background-color: #28a745;
-            color: white;
+/* Контейнер для кнопок */
+.buttons-container {
+             position: fixed; /* Контейнер фиксируется на экране */
+            bottom: 20px; /* Отступ от нижней границы экрана */
+            right: 20px; /* Отступ от правой границы экрана */
+            display: flex; /* Flexbox для горизонтального выравнивания кнопок */
+            gap: 10px; /* Расстояние между кнопками */
+            z-index: 100; /* Чтобы кнопки были поверх других элементов */
+        }
+        /* Стиль кнопки "Добавить" */
+        .btn_add {
+            width: 120px; /* Фиксированная ширина кнопок */
+            height: 40px; /* Фиксированная высота кнопок */
+            background: #28a745; /* Зеленый цвет */
+            color: #fff;
+            font-size: 16px; /* Уменьшаем размер шрифта */
+            padding: 10px 20px; /* Уменьшаем отступы */
             border: none;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 5px;
-            margin: 5px 0;
+            border-radius: 6px; /* Уменьшаем радиус углов */
             cursor: pointer;
+            font-weight: bold;
+            width: auto; /* Ширина уменьшена до авто */
+            margin-left: 270px;
+            justify-content: flex-end; /* Прижимаем кнопки вправо */
         }
-
-        button:hover {
-            background-color: #218838;
+            
+        .btn_add:hover {
+            background: #218838;
+            box-shadow: 0 0 1px 1px #2fb54c;
+            transform: scale(1.01);
         }
-
-        .cancel {
-            display: block;
-            margin-top: 15px;
-            text-align: center;
+        /* Стиль кнопки-ссылки "Назад" */
+        .back-btn {
+            width: 120px; /* Фиксированная ширина кнопок */
+            height: 40px;
+            background: #dc3545; /* Красный цвет */
+            color: #fff;
+            font-size: 16px; /* Уменьшаем размер шрифта */
+            padding: 10px 20px; /* Уменьшаем отступы */
+            border: none;
+            border-radius: 6px; /* Уменьшаем радиус углов */
+            cursor: pointer;
             text-decoration: none;
-            color: #dc3545;
-            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            justify-content: flex-end; /* Прижимаем кнопки вправо */
+
         }
 
-        .cancel:hover {
-            text-decoration: underline;
+        .back-btn:hover {
+            background: #c82333;
+            box-shadow: 0 0 1px 1px #d9534f;
+            transform: scale(1.01);
         }
     </style>
 </head>
@@ -105,8 +131,8 @@
         <label for="address">Адрес:</label>
         <input type="text" id="address" name="address" value="{{ client.address }}" required>
 
-        <button type="submit">Сохранить</button>
-        <a href="{% url 'client_list' %}" class="cancel">Отмена</a>
+        <button type="submit"; class="btn_add" >Сохранить</button>
+        <a href="{% url 'client_list' %}" class="back-btn">Отмена</a>
     </form>
 </body>
 </html>

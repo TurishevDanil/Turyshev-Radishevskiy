@@ -1,10 +1,39 @@
 {% extends 'crm/base.html' %}
 
 {% block content %}
-<h1>Сделки</h1>
-<ul>
-    {% for deal in deals %}
-    <li>{{ deal.client.name }} - {{ deal.amount }} - {{ deal.status }}</li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сделки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+            padding-bottom: 90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Ваш контент для страницы "Сделки" здесь -->
+        <h1>Сделки</h1>
+        <p>Здесь размещается информация о сделках.</p>
+    </div>
+</body>
+</html>
 {% endblock %}
