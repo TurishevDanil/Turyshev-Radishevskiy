@@ -17,15 +17,15 @@
         }
 
         .container {
-    max-width: 1200px;
-    margin: 40px auto;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    position: relative; /* Основа для позиционированных элементов */
-    padding-bottom: 90px; /* Увеличиваем отступ снизу, чтобы не перекрывать таблицу кнопкой */
-}
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative; /* Основа для позиционированных элементов */
+            padding-bottom: 90px; /* Увеличиваем отступ снизу, чтобы не перекрывать таблицу кнопкой */
+        }
 
         h1 {
             text-align: center;
@@ -33,16 +33,16 @@
         }
 
         table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
         .table-wrapper {
-    position: relative; /* Для большей гибкости, только таблица остается привязанной в контейнере */
-}
+            position: relative; /* Для большей гибкости, только таблица остается привязанной в контейнере */
+        }
 
-table th {
+        table th {
             background: #007bff;
             color: #fff;
             text-transform: uppercase;
@@ -114,31 +114,37 @@ table th {
         }
 
         .btn.btn-success.mt-3 {
-            position: absolute; /* Абсолютное позиционирование относительно контейнера */
-            bottom: 10px; /* Отступ снизу */
+            position: absolute; /* Абсолютное позиционирование */
+            bottom: 20px; /* Отступ снизу */
             left: 20px; /* Отступ слева */
-            padding: 12px 10px;
-            background-color: #28a745;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
+            padding: 12px 10px; /* Отступы */
+            background-color: #28a745; /* Основной цвет кнопки (зеленый) */
+            color: #fff; /* Белый текст */
+            font-size: 16px; /* Размер текста */
+            font-weight: bold; /* Вес текста */
+            border-radius: 8px; /* Скругленные края */
+            text-align: center; /* Центрирование текста */
+            cursor: pointer; /* Иконка указателя */
+            text-decoration: none; /* Убираем подчеркивание */
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.2); /* Легкое зеленое свечение */
+            transition: all 0.3s ease; /* Плавный переход для всех свойств */
             display: inline-block;
-            bottom: 20px
         }
 
-.btn.btn-success.mt-3:hover {
-    background-color: #218838;
-    box-shadow: 0 0 1px 1px #2fb54c; /* Создаем свечение */
-    transform: scale(1.01); /* Увеличиваем кнопку немного */
-}
+        .btn.btn-success.mt-3:hover {
+            box-shadow: 0 0 15px 5px rgba(40, 167, 69, 0.5); /* Зеленое свечение при наведении */
+            transform: scale(1.01); /* Незначительное увеличение */
+        }
+
+        .btn.btn-success.mt-3:active {
+            transform: scale(0.95); /* Легкое сжатие при клике */
+            box-shadow: 0 0 10px 3px rgba(40, 167, 69, 0.5); /* Свечение при нажатии */
+            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Быстрая анимация */
+        }
 
 
 
-.btn.btn-warning.btn-sm, .btn.btn-danger.btn-sm {
+        .btn.btn-warning.btn-sm, .btn.btn-danger.btn-sm {
             padding: 8px 16px; /* Кнопки действий */
             border: none;
             border-radius: 5px;
@@ -148,6 +154,7 @@ table th {
             text-decoration: none;
             display: inline-block;
         }
+
         .btn.btn-warning.btn-sm {
             background-color: #ffc107;
         }
@@ -157,6 +164,11 @@ table th {
             background-color: #e0a800;
             box-shadow: 0 0 3px 1px #ffc929; /* Создаем свечение */
             transform: scale(1.01); /* Увеличиваем кнопку немного */
+        }
+
+        .btn.btn-warning.btn-sm:active {
+            box-shadow: 0 0 4px 1px rgba(255, 193, 7, 0.8); /* Усиленное свечение при нажатии */
+            transform: scale(0.97); /* Легкое уменьшение при клике */
         }
 
         .btn.btn-danger.btn-sm {
@@ -169,8 +181,10 @@ table th {
             transform: scale(1.01); /* Увеличиваем кнопку немного */
         }
 
-        
-
+        .btn.btn-danger.btn-sm:active {
+            box-shadow: 0 0 4px 1px rgba(173, 28, 43, 0.8); /* Усиленное свечение при нажатии */
+            transform: scale(0.97); /* Легкое уменьшение при клике */
+        }
     </style>
 </head>
 <body>    <div class="container">

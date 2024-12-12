@@ -82,8 +82,8 @@
             color: #444;
         }
 
-/* Контейнер для кнопок */
-.buttons-container {
+        /* Контейнер для кнопок */
+        .buttons-container {
              position: fixed; /* Контейнер фиксируется на экране */
             bottom: 20px; /* Отступ от нижней границы экрана */
             right: 20px; /* Отступ от правой границы экрана */
@@ -91,32 +91,41 @@
             gap: 10px; /* Расстояние между кнопками */
             z-index: 100; /* Чтобы кнопки были поверх других элементов */
         }
-        /* Стиль кнопки "Добавить" */
+
         .btn_add {
-            width: 1210x; /* Фиксированная ширина кнопок */
+            width: 120px; /* Фиксированная ширина кнопок */
             height: 40px; /* Фиксированная высота кнопок */
             background: #28a745; /* Зеленый цвет */
-            color: #fff;
-            font-size: 16px; /* Уменьшаем размер шрифта */
-            padding: 10px 20px; /* Уменьшаем отступы */
+            color: #fff; /* Белый текст */
+            font-size: 16px; /* Размер шрифта */
+            padding: 10px 20px; /* Отступы */
             border: none;
-            border-radius: 6px; /* Уменьшаем радиус углов */
-            cursor: pointer;
-            font-weight: bold;
-            width: auto; /* Ширина уменьшена до авто */
-            margin-left: 248px;
-            justify-content: flex-end; /* Прижимаем кнопки вправо */
+            border-radius: 6px; /* Радиус углов */
+            cursor: pointer; /* Иконка указателя */
+            font-weight: bold; /* Жирный текст */
+            margin-left: 250px; /* Отступ слева */
+            justify-content: flex-end; /* Прижимаем содержимое вправо */
+            text-align: center; /* Центрирование текста */
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.2); /* Легкое зеленое свечение изначально */
+            transition: all 0.3s ease; /* Плавный переход для всех свойств */
         }
-            
+
         .btn_add:hover {
-            background: #218838;
-            box-shadow: 0 0 1px 1px #2fb54c;
-            transform: scale(1.01);
+            box-shadow: 0 0 15px 5px rgba(40, 167, 69, 0.5); /* Усиленное зеленое свечение */
+            transform: scale(1.01); /* Незначительное увеличение */
         }
+
+        .btn_add:active {
+            transform: scale(0.95); /* Легкое уменьшение при клике */
+            box-shadow: 0 0 10px 3px rgba(40, 167, 69, 0.5); /* Усиленное свечение при нажатии */
+            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Быстрая реакция для этих эффектов */
+        }
+
         /* Стиль кнопки-ссылки "Назад" */
         .back-btn {
+            width: 120px; /* Фиксированная ширина кнопок */
+            height: 40px;
             background: #dc3545; /* Красный цвет */
-            width: 120px;
             color: #fff;
             font-size: 16px; /* Уменьшаем размер шрифта */
             padding: 10px 20px; /* Уменьшаем отступы */
@@ -127,14 +136,20 @@
             text-align: center;
             font-weight: bold;
             justify-content: flex-end; /* Прижимаем кнопки вправо */
-
         }
 
         .back-btn:hover {
             background: #c82333;
-            box-shadow: 0 0 1px 1px #d9534f;
+            box-shadow: 0 0 10px 1px #d9534f;
             transform: scale(1.01);
         }
+        
+        .back-btn:active {
+            transform: scale(0.95); /* Легкое уменьшение при клике */
+            box-shadow: 0 0 10px 3px rgba(218, 47, 38, 0.5); /* Усиленное свечение при нажатии */
+            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Быстрая реакция для этих эффектов */
+        }
+
         /* Стили ссылок */
         a {
             display: block;

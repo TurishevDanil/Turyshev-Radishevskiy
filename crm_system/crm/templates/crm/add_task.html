@@ -27,18 +27,18 @@
         
     
             /* Стили формы */
-            form {
-    width: 100%; /* По умолчанию форма занимает всю доступную ширину */
-    max-width: 400px; /* Устанавливаем максимальную ширину формы */
-    margin: 0 auto; /* Центрируем форму */
-    padding: 20px; /* Отступы внутри формы */
-    border: 1px solid #ccc; /* Лёгкая рамка */
-    border-radius: 8px; /* Округление углов формы */
-    background-color: #fff; /* Белый фон формы */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Небольшая тень для выделения */
-}
+        form {
+            width: 100%; /* По умолчанию форма занимает всю доступную ширину */
+            max-width: 400px; /* Устанавливаем максимальную ширину формы */
+            margin: 0 auto; /* Центрируем форму */
+            padding: 20px; /* Отступы внутри формы */
+            border: 1px solid #ccc; /* Лёгкая рамка */
+            border-radius: 8px; /* Округление углов формы */
+            background-color: #fff; /* Белый фон формы */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Небольшая тень для выделения */
+        }
     
-            label {
+        label {
             font-size: 15px; /* Размер шрифта для баланса */
             color: #444;
             display: block;
@@ -46,78 +46,87 @@
             font-weight: bold;
         }
     
-            /* Стили для текстовых полей */
-            input, textarea {
-                width: 100%; /* Полная ширина */
-                padding: 12px; /* Внутренний отступ */
-                margin-bottom: 25px; /* Отступ между полями */
-                border: 1px solid #ccc;
-                border-radius: 6px; /* Радиус углов */
-                font-size: 16px; /* Размер текста */
-                box-sizing: border-box; /* Способ расчета ширины/высоты элемента */
-                background-color: #f9f9f9; /* Цвет фона полей */
-            }
+        /* Стили для текстовых полей */
+        input, textarea {
+            width: 100%; /* Полная ширина */
+            padding: 12px; /* Внутренний отступ */
+            margin-bottom: 25px; /* Отступ между полями */
+            border: 1px solid #ccc;
+            border-radius: 6px; /* Радиус углов */
+            font-size: 16px; /* Размер текста */
+            box-sizing: border-box; /* Способ расчета ширины/высоты элемента */
+            background-color: #f9f9f9; /* Цвет фона полей */
+        }
     
-            textarea {
-                resize: vertical; /* Изменение размера только по вертикали */
-                min-height: 80px; /* Минимальная высота */
-                max-height: 250px; /* Максимальная высота */
-            }
+        textarea {
+            resize: vertical; /* Изменение размера только по вертикали */
+            min-height: 80px; /* Минимальная высота */
+            max-height: 250px; /* Максимальная высота */
+        }
     
-            /* Стили чекбокса */
-            .checkbox-wrapper {
-                display: flex;
-                align-items: center; /* Центрируем по вертикали */
-                margin-bottom: 20px; /* Отступ */
-            }
+        /* Стили чекбокса */
+        .checkbox-wrapper {
+            display: flex;
+             align-items: center; /* Центрируем по вертикали */
+            margin-bottom: 20px; /* Отступ */
+        }
     
-            .checkbox-wrapper input[type="checkbox"] {
-                width: 18px; /* Размер чекбокса */
-                height: 18px;
-                cursor: pointer;
-                margin-right: 15px; /* Промежуток между чекбоксом и текстом */
-            }
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 18px; /* Размер чекбокса */
+            height: 18px;
+            cursor: pointer;
+            margin-right: 15px; /* Промежуток между чекбоксом и текстом */
+        }
     
-            .checkbox-wrapper label {
-                font-size: 16px; /* Размер шрифта */
-                font-weight: bold;
-                color: #444;
-            }
+        .checkbox-wrapper label {
+            font-size: 16px; /* Размер шрифта */
+            font-weight: bold;
+            color: #444;
+        }
             
-/* Контейнер для кнопок */
-.buttons-container {
-    position: relative; /* Позиционируем кнопки относительно родителя */
-    display: flex; /* Flexbox для горизонтального расположения */
-    justify-content: center; /* Центрируем кнопки */
-    gap: 10px; /* Отступы между кнопками */
-    margin-top: 20px; /* Добавляем отступ сверху относительно формы */
-}
-        /* Стиль кнопки "Добавить" */
+        /* Контейнер для кнопок */
+        .buttons-container {
+            position: relative; /* Позиционируем кнопки относительно родителя */
+            display: flex; /* Flexbox для горизонтального расположения */
+            justify-content: center; /* Центрируем кнопки */
+            gap: 10px; /* Отступы между кнопками */
+            margin-top: 20px; /* Добавляем отступ сверху относительно формы */
+        }
+
         .btn_add {
-            width: 1210x; /* Фиксированная ширина кнопок */
+            width: 120px; /* Фиксированная ширина кнопок */
             height: 40px; /* Фиксированная высота кнопок */
             background: #28a745; /* Зеленый цвет */
-            color: #fff;
-            font-size: 16px; /* Уменьшаем размер шрифта */
-            padding: 10px 20px; /* Уменьшаем отступы */
+            color: #fff; /* Белый текст */
+            font-size: 16px; /* Размер шрифта */
+            padding: 10px 20px; /* Отступы */
             border: none;
-            border-radius: 6px; /* Уменьшаем радиус углов */
-            cursor: pointer;
-            font-weight: bold;
-            width: auto; /* Ширина уменьшена до авто */
-            margin-left: 175px;
-            justify-content: flex-end; /* Прижимаем кнопки вправо */
+            border-radius: 6px; /* Радиус углов */
+            cursor: pointer; /* Иконка указателя */
+            font-weight: bold; /* Жирный текст */
+            margin-left: 165px; /* Отступ слева */
+            justify-content: flex-end; /* Прижимаем содержимое вправо */
+            text-align: center; /* Центрирование текста */
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.2); /* Легкое зеленое свечение изначально */
+            transition: all 0.3s ease; /* Плавный переход для всех свойств */
         }
-            
+
         .btn_add:hover {
-            background: #218838;
-            box-shadow: 0 0 1px 1px #2fb54c;
-            transform: scale(1.01);
+            box-shadow: 0 0 15px 5px rgba(40, 167, 69, 0.5); /* Усиленное зеленое свечение */
+            transform: scale(1.01); /* Незначительное увеличение */
         }
+
+        .btn_add:active {
+            transform: scale(0.95); /* Легкое уменьшение при клике */
+            box-shadow: 0 0 10px 3px rgba(40, 167, 69, 0.5); /* Усиленное свечение при нажатии */
+            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Быстрая реакция для этих эффектов */
+        }
+
         /* Стиль кнопки-ссылки "Назад" */
         .back-btn {
+            width: 120px; /* Фиксированная ширина кнопок */
+            height: 40px;
             background: #dc3545; /* Красный цвет */
-            width: 120px;
             color: #fff;
             font-size: 16px; /* Уменьшаем размер шрифта */
             padding: 10px 20px; /* Уменьшаем отступы */
@@ -128,13 +137,18 @@
             text-align: center;
             font-weight: bold;
             justify-content: flex-end; /* Прижимаем кнопки вправо */
-
         }
 
         .back-btn:hover {
             background: #c82333;
-            box-shadow: 0 0 1px 1px #d9534f;
+            box-shadow: 0 0 10px 1px #d9534f;
             transform: scale(1.01);
+        }
+        
+        .back-btn:active {
+            transform: scale(0.95); /* Легкое уменьшение при клике */
+            box-shadow: 0 0 10px 3px rgba(218, 47, 38, 0.5); /* Усиленное свечение при нажатии */
+            transition: transform 0.1s ease, box-shadow 0.1s ease; /* Быстрая реакция для этих эффектов */
         }
 
     
