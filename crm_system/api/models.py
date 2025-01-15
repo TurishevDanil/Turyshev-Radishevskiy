@@ -3,6 +3,10 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
     
 # Расширьте пользователя для добавления ролей
+
+
+from django.contrib.auth.models import AbstractUser
+
 class User(AbstractUser):
     # Остальные пользовательские поля
     ROLE_CHOICES = (
@@ -14,12 +18,12 @@ class User(AbstractUser):
     # Переопределение связей с уникальными related_name
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='crm_user_groups',  # Уникальное имя связи
+        related_name='api_user_groups',  # Уникальное имя связи
         blank=True
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='crm_user_permissions',  # Уникальное имя связи
+        related_name='api_user_permissions',  # Уникальное имя связи
         blank=True
     )
 
