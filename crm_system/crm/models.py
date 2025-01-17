@@ -31,7 +31,7 @@ class Client(models.Model):
     phone = models.CharField(max_length=15, null=True, blank=True)
     address = models.TextField(null=True, blank=True)
 
-    def str(self):
+    def __str__(self):
         return f"{self.name} {self.surname}"
 
 class Deal(models.Model):

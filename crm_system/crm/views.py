@@ -5,6 +5,13 @@ from .models import Client
 from .forms import ClientForm
 from django.contrib.auth.decorators import login_required
 from .forms import TaskForm
+from rest_framework import viewsets
+from .models import Client
+from .Serializer_clients import ClientSerializer
+from rest_framework.views import APIView, Response
+from .Serializer_tasks import TaskSerializer
+
+
 
 def index(request):
     return render(request, 'crm/index.html')
@@ -113,3 +120,15 @@ def edit_client(request, client_id):
 
     # Если GET-запрос, передаем данные клиента в форму для отображения
     return render(request, 'crm/edit_client.html', {'client': client})
+
+class ClientView(APIView):
+    def get(self, request):
+        clients = Client.objects.all()
+        serializer = ClientSerializer(clients, many = True)
+        return Response({"clients":serializer.data})
+
+class TaskView(APIView):
+    def get(self, request):
+        tasks = Task.objects.all()
+        serializer = TaskSerializer(tasks, many = True)
+        return Response({"tasks":serializer.data})

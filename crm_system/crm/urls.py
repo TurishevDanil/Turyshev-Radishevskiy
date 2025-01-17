@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from .views import ClientView, TaskView
+
+
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -22,5 +25,6 @@ urlpatterns = [
     path('add_task/', views.add_task, name='add_task'),
     path('edit/<int:task_id>/', views.edit_task, name='edit_task'),  # Редактирование задачи
     path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
-    
+    path('client/', ClientView.as_view()),
+    path('tasks/', TaskView.as_view()),
 ]
