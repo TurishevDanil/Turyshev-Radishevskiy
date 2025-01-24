@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Client, Deal, Task
+from .models import Client, Deal, Task, User
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client
 from .forms import ClientForm
@@ -10,7 +10,12 @@ from .models import Client
 from .Serializer_clients import ClientSerializer
 from rest_framework.views import APIView, Response
 from .Serializer_tasks import TaskSerializer
-
+from .Serializer_deals import DealSerializer
+from .Serializer_users import UserSerializer
+from django.contrib.auth.hashers import make_password
+from django.db import IntegrityError
+from rest_framework.generics import GenericAPIView
+from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateAPIView
 
 
 def index(request):
@@ -30,6 +35,53 @@ def deals(request):
 def task(request):
     task = Task.objects.all()
     return render(request, 'crm/task.html', {'task': task})
+
+def register(request):
+    errors = []
+    data = {}
+
+    if request.method == "POST":
+        login = request.POST.get('login')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        data = {
+            "login": login,
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+        }
+
+        # Валидация данных
+        if not login or not first_name or not last_name or not email or not password:
+            errors.append("Все поля должны быть заполнены.")
+        if password != confirm_password:
+            errors.append("Пароли не совпадают.")
+        if User.objects.filter(email=email).exists():
+            errors.append("Пользователь с таким email уже существует.")
+        if User.objects.filter(login=login).exists():
+            errors.append("Логин уже занят.")
+
+        # Если нет ошибок, создаём пользователя
+        if not errors:
+            try:
+                user = User(
+                    login=login,
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email,
+                    password=make_password(password)
+                )
+                user.save()
+                return redirect('login')
+            except IntegrityError:
+                errors.append("Произошла ошибка при сохранении данных. Попробуйте снова.")
+
+    return render(request, 'registration/register.html', {'errors': errors, 'data': data})
+
 
 def add_task(request):
     if request.method == 'POST':
@@ -126,9 +178,79 @@ class ClientView(APIView):
         clients = Client.objects.all()
         serializer = ClientSerializer(clients, many = True)
         return Response({"clients":serializer.data})
+    def post(self, request):
+        client = request.data.get('clients')
+ # Create an article from the above data
+        serializer = ClientSerializer(data=client)
+        if serializer.is_valid(raise_exception=True):
+         client_saved = serializer.save()
+        return Response({"success": "Client '{}' created successfully".format(client_saved.title)})
 
 class TaskView(APIView):
     def get(self, request):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many = True)
         return Response({"tasks":serializer.data})
+    def post(self, request):
+        task = request.data.get('tasks')
+ # Create an article from the above data
+        serializer = TaskSerializer(data=task)
+        if serializer.is_valid(raise_exception=True):
+         task_saved = serializer.save()
+        return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
+    
+class DealView(APIView):
+    def get(self, request):
+        deals = Deal.objects.all()
+        serializer = DealSerializer(deals, many = True)
+        return Response({"deals":serializer.data})
+    def post(self, request):
+        deal = request.data.get('deals')
+ # Create an article from the above data
+        serializer = DealSerializer(data=deal)
+        if serializer.is_valid(raise_exception=True):
+         deal_saved = serializer.save()
+        return Response({"success": "Deal '{}' created successfully".format(deal_saved.title)})
+
+# class UserView(APIView):
+#     def get(self, request):
+#         users = User.objects.all()
+#         serializer = UserSerializer(users, many = True)
+#         return Response({"users":serializer.data})
+#     def post(self, request):
+#         user = request.data.get('users')
+#  # Create an article from the above data
+#         serializer = UserSerializer(data=user)
+#         if serializer.is_valid(raise_exception=True):
+#          user_saved = serializer.save()
+#         return Response({"success": "Client '{}' created successfully".format(user_saved.title)})
+#     def put(self, request, pk):
+#         saved_user = get_object_or_404(User.objects.all(), pk=pk)
+#         data = request.data.get('users')
+#         serializer = UserSerializer(instance=saved_user, data=data, partial=True)
+#         if serializer.is_valid(raise_exception=True):
+#             user_saved = serializer.save()
+#         return Response({
+#         "success": "User '{}' updated successfully".format(user_saved.title)
+#         })
+    
+#     def delete(self, request, pk):
+#         # Get object with this pk
+#         user = get_object_or_404(User.objects.all(), pk=pk)
+#         user.delete()
+#         return Response({
+#         "message": "User with id `{}` has been deleted.".format(pk)
+#         }, status=204)
+
+class UserView(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    def perform_create(self, serializer):
+        user = get_object_or_404(User, id=self.request.data.get('user_id'))
+        return serializer.save(user=user)
+    
+class SingleUserView(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+

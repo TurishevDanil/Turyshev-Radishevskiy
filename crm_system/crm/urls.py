@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import ClientView, TaskView
+from .views import ClientView, TaskView, DealView, UserView, SingleUserView
 
 
 
@@ -23,8 +23,13 @@ urlpatterns = [
     path('clients/edit/<int:client_id>/', views.edit_client, name='edit_client'),
     path('task/', views.task, name='task'),
     path('add_task/', views.add_task, name='add_task'),
-    path('edit/<int:task_id>/', views.edit_task, name='edit_task'),  # Редактирование задачи
+    path('edit/<int:task_id>/', views.edit_task, name='edit_task'),
     path('delete/<int:task_id>/', views.delete_task, name='delete_task'),
+    path('register/', views.register, name='register'),
     path('client/', ClientView.as_view()),
     path('tasks/', TaskView.as_view()),
+    path('deal/', DealView.as_view()),
+    path('users/', UserView.as_view()),
+    path('users/<int:pk>', SingleUserView.as_view()),
+
 ]

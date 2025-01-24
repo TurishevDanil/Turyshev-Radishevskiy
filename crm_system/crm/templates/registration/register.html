@@ -1,0 +1,159 @@
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        background-color: #f4f4f9; 
+        margin: 0; 
+        padding: 0; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        height: 100vh; 
+    } 
+
+    
+
+    h1 { 
+        margin: 0 0 20px; 
+        font-size: 24px; 
+        color: #333; 
+        text-align: center; 
+    } 
+
+    form { 
+        background: #fff; 
+        padding: 20px 20px; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        width: 100%; 
+        max-width: 420px; 
+        margin: 0 auto; 
+    } 
+
+    label { 
+        font-size: 15px; 
+        color: #444; 
+        display: block; 
+        margin-bottom: 8px; 
+        font-weight: bold; 
+    } 
+
+    input, textarea { 
+        width: 100%; 
+        padding: 10px; 
+        margin-bottom: 20px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        font-size: 14px; 
+        box-sizing: border-box; 
+        background-color: #f9f9f9; 
+    } 
+
+    .buttons-container {
+        position: fixed; 
+        bottom: 20px; 
+        right: 20px; 
+        display: flex; 
+        gap: 10px; 
+        z-index: 100; 
+    }
+
+    .btn_add { 
+        width: 120px; 
+        height: 40px; 
+        background: #28a745; 
+        color: #fff; 
+        font-size: 16px; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 6px; 
+        cursor: pointer; 
+        font-weight: bold; 
+        text-align: center; 
+        box-shadow: 0 0 15px rgba(40, 167, 69, 0.2); 
+        transition: all 0.3s ease; 
+    } 
+
+    .btn_add:hover { 
+        box-shadow: 0 0 15px 5px rgba(40, 167, 69, 0.5); 
+        transform: scale(1.01); 
+    } 
+
+    .btn_add:active { 
+        transform: scale(0.95); 
+        box-shadow: 0 0 10px 3px rgba(40, 167, 69, 0.5); 
+        transition: transform 0.1s ease, box-shadow 0.1s ease; 
+    } 
+    
+    .back-btn { 
+        width: 120px; 
+        height: 40px; 
+        background: #dc3545; 
+        color: #fff; 
+        font-size: 16px; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 6px; 
+        cursor: pointer; 
+        text-decoration: none; 
+        text-align: center; 
+        font-weight: bold; 
+    } 
+
+    .back-btn:hover { 
+        background: #c82333; 
+        box-shadow: 0 0 10px 1px #d9534f; 
+        transform: scale(1.01); 
+    } 
+     
+    .back-btn:active { 
+        transform: scale(0.95); 
+        box-shadow: 0 0 10px 3px rgba(218, 47, 38, 0.5); 
+        transition: transform 0.1s ease, box-shadow 0.1s ease; 
+    } 
+</style>
+
+<div class="container">
+    <h1>Регистрация</h1>
+
+    {% if errors %}
+        <div class="errors">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <label for="login">Логин</label>
+        <input type="text" id="login" name="login" value="{{ data.login }}" required>
+        
+        <label for="first_name">Имя</label>
+        <input type="text" id="first_name" name="first_name" value="{{ data.first_name }}" required>
+        
+        <label for="last_name">Фамилия</label>
+        <input type="text" id="last_name" name="last_name" value="{{ data.last_name }}" required>
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ data.email }}" required>
+        
+        <label for="password">Пароль</label>
+        <input type="password" id="password" name="password" required>
+        
+        
+        <label for="confirm_password">Подтверждение пароля</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+        
+        <input type="submit" value="Зарегистрироваться" class="btn_add">
+        <button type="button" onclick="window.history.back();" class="back-btn">Назад</button>
+        
+    </form>
+
+
+
+        
+    </div>
+</div>

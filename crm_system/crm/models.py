@@ -2,26 +2,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
     
-# Расширьте пользователя для добавления ролей
-class User(AbstractUser):
-    # Остальные пользовательские поля
-    ROLE_CHOICES = (
-        ('admin', 'Администратор'),
-        ('employee', 'Сотрудник'),
-    )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='раб')
+class User(models.Model):
+    login = models.CharField(max_length=150,  default="Ваш уникальный логин")
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=128)  # Рекомендуется использовать Django встроенные функции для хеширования паролей
 
-    # Переопределение связей с уникальными related_name
-    groups = models.ManyToManyField(
-        'auth.Group',
-        related_name='crm_user_groups',  # Уникальное имя связи
-        blank=True
-    )
-    user_permissions = models.ManyToManyField(
-        'auth.Permission',
-        related_name='crm_user_permissions',  # Уникальное имя связи
-        blank=True
-    )
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.login})"
 
 class Client(models.Model):
     name = models.CharField(max_length=255)
@@ -35,7 +24,7 @@ class Client(models.Model):
         return f"{self.name} {self.surname}"
 
 class Deal(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.CharField(max_length=255)
     date = models.DateField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20)
