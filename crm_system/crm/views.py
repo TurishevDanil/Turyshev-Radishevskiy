@@ -15,7 +15,8 @@ from .Serializer_users import UserSerializer
 from django.contrib.auth.hashers import make_password
 from django.db import IntegrityError
 from rest_framework.generics import GenericAPIView
-from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateAPIView
+from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
+
 
 
 def index(request):
@@ -173,84 +174,87 @@ def edit_client(request, client_id):
     # Если GET-запрос, передаем данные клиента в форму для отображения
     return render(request, 'crm/edit_client.html', {'client': client})
 
-class ClientView(APIView):
-    def get(self, request):
-        clients = Client.objects.all()
-        serializer = ClientSerializer(clients, many = True)
-        return Response({"clients":serializer.data})
-    def post(self, request):
-        client = request.data.get('clients')
- # Create an article from the above data
-        serializer = ClientSerializer(data=client)
-        if serializer.is_valid(raise_exception=True):
-         client_saved = serializer.save()
-        return Response({"success": "Client '{}' created successfully".format(client_saved.title)})
 
-class TaskView(APIView):
-    def get(self, request):
-        tasks = Task.objects.all()
-        serializer = TaskSerializer(tasks, many = True)
-        return Response({"tasks":serializer.data})
-    def post(self, request):
-        task = request.data.get('tasks')
- # Create an article from the above data
-        serializer = TaskSerializer(data=task)
-        if serializer.is_valid(raise_exception=True):
-         task_saved = serializer.save()
-        return Response({"success": "Task '{}' created successfully".format(task_saved.title)})
+
+# class TaskView(ListCreateAPIView):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+#     def perform_create(self, serializer):
+#         task = get_object_or_404(Task, id=self.request.data.get('task_id'))
+#         return serializer.save(task=task)
     
-class DealView(APIView):
-    def get(self, request):
-        deals = Deal.objects.all()
-        serializer = DealSerializer(deals, many = True)
-        return Response({"deals":serializer.data})
-    def post(self, request):
-        deal = request.data.get('deals')
- # Create an article from the above data
-        serializer = DealSerializer(data=deal)
-        if serializer.is_valid(raise_exception=True):
-         deal_saved = serializer.save()
-        return Response({"success": "Deal '{}' created successfully".format(deal_saved.title)})
+# class SingleTaskView(RetrieveUpdateAPIView):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
 
-# class UserView(APIView):
-#     def get(self, request):
-#         users = User.objects.all()
-#         serializer = UserSerializer(users, many = True)
-#         return Response({"users":serializer.data})
-#     def post(self, request):
-#         user = request.data.get('users')
-#  # Create an article from the above data
-#         serializer = UserSerializer(data=user)
-#         if serializer.is_valid(raise_exception=True):
-#          user_saved = serializer.save()
-#         return Response({"success": "Client '{}' created successfully".format(user_saved.title)})
-#     def put(self, request, pk):
-#         saved_user = get_object_or_404(User.objects.all(), pk=pk)
-#         data = request.data.get('users')
-#         serializer = UserSerializer(instance=saved_user, data=data, partial=True)
-#         if serializer.is_valid(raise_exception=True):
-#             user_saved = serializer.save()
-#         return Response({
-#         "success": "User '{}' updated successfully".format(user_saved.title)
-#         })
+# class SingleTaskView(RetrieveUpdateDestroyAPIView):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
+
+
+
+# class UserView(ListCreateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     def perform_create(self, serializer):
+#         user = get_object_or_404(User, id=self.request.data.get('user_id'))
+#         return serializer.save(user=user)
     
-#     def delete(self, request, pk):
-#         # Get object with this pk
-#         user = get_object_or_404(User.objects.all(), pk=pk)
-#         user.delete()
-#         return Response({
-#         "message": "User with id `{}` has been deleted.".format(pk)
-#         }, status=204)
+# class SingleUserView(RetrieveUpdateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
 
-class UserView(ListCreateAPIView):
-    queryset = User.objects.all()
+# class SingleUserView(RetrieveUpdateDestroyAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+
+
+# class DealView(ListCreateAPIView):
+#     queryset = Deal.objects.all()
+#     serializer_class = DealSerializer
+#     def perform_create(self, serializer):
+#         deal = get_object_or_404(Deal, id=self.request.data.get('deal_id'))
+#         return serializer.save(deal=deal)
+    
+# class SingleDealView(RetrieveUpdateAPIView):
+#     queryset = Deal.objects.all()
+#     serializer_class = DealSerializer
+
+# class SingleUDealView(RetrieveUpdateDestroyAPIView):
+#     queryset = Deal.objects.all()
+#     serializer_class = DealSerializer
+
+
+
+# class ClientView(ListCreateAPIView):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
+#     def perform_create(self, serializer):
+#         client = get_object_or_404(Client, id=self.request.data.get('client_id'))
+#         return serializer.save(client=client)
+    
+# class SingleClientView(RetrieveUpdateAPIView):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
+
+# class SingleClientView(RetrieveUpdateDestroyAPIView):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
-    def perform_create(self, serializer):
-        user = get_object_or_404(User, id=self.request.data.get('user_id'))
-        return serializer.save(user=user)
-    
-class SingleUserView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
 
+class TaskViewSet(viewsets.ModelViewSet):
+    serializer_class = TaskSerializer
+    queryset = Task.objects.all()
 
+class DealViewSet(viewsets.ModelViewSet):
+    serializer_class = DealSerializer
+    queryset = Deal.objects.all()
+
+class ClientViewSet(viewsets.ModelViewSet):
+    serializer_class = ClientSerializer
+    queryset = Client.objects.all()

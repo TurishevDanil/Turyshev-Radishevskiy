@@ -29,6 +29,9 @@ class Deal(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20)
 
+    def __str__(self):
+        return self.client
+
 
 class Task(models.Model):
     title = models.CharField(default="", max_length=200, verbose_name="Название задачи")
