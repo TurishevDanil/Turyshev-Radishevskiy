@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import   TaskViewSet, ClientViewSet, DealViewSet, UserViewSet
+from .views import   TaskViewSet, DealViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
 
 
@@ -32,15 +32,17 @@ urlpatterns = [
     # path('users/<int:pk>', SingleUserView.as_view()),
     # path('tasks/<int:pk>', SingleTaskView.as_view()),
     # path('deals/<int:pk>', SingleDealView.as_view()),
-    # path('client/<int:pk>', SingleClientView.as_view()),
-
+    path('api/clients/', views.GetClientInfoView.as_view()),
+    path('api/deals/', views.GetDealInfoView.as_view()),
+    path('api/tasks/', views.GetTaskInfoView.as_view()),
+    path('api/users/', views.GetUserInfoView.as_view()),
     # path('users/', UserView.as_view({'get': 'list'})),
     # path('users/<int:pk>', UserView.as_view({'get': 'retrieve'})),
 ]
-router = DefaultRouter()
-router.register(r'users', UserViewSet, basename='user')
-router.register(r'tasks', TaskViewSet, basename='task')
-router.register(r'deals', DealViewSet, basename='deal')
-router.register(r'clients', ClientViewSet, basename='client')
-urlpatterns = router.urls
+# router = DefaultRouter()
+# router.register(r'users', UserViewSet, basename='user')
+# router.register(r'tasks', TaskViewSet, basename='task')
+# router.register(r'deals', DealViewSet, basename='deal')
+# router.register(r'clients', ClientViewSet, basename='client')
+# urlpatterns = router.urls
 

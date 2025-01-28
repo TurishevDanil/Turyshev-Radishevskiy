@@ -255,6 +255,54 @@ class DealViewSet(viewsets.ModelViewSet):
     serializer_class = DealSerializer
     queryset = Deal.objects.all()
 
-class ClientViewSet(viewsets.ModelViewSet):
-    serializer_class = ClientSerializer
-    queryset = Client.objects.all()
+# class ClientViewSet(viewsets.ModelViewSet):
+#     serializer_class = ClientSerializer
+#     queryset = Client.objects.all()
+
+class GetClientInfoView(APIView):
+    def get(self, request):
+        # Получаем набор всех записей из таблицы Capital
+        queryset = Client.objects.all()
+        # Сериализуем извлечённый набор записей
+        serializer_for_queryset = ClientSerializer(
+            instance=queryset, # Передаём набор записей
+            many=True # Указываем, что на вход подаётся именно набор записей
+        )
+        return Response(serializer_for_queryset.data)
+    
+
+class GetDealInfoView(APIView):
+    def get(self, request):
+        # Получаем набор всех записей из таблицы Capital
+        queryset = Deal.objects.all()
+        # Сериализуем извлечённый набор записей
+        serializer_for_queryset = DealSerializer(
+            instance=queryset, # Передаём набор записей
+            many=True # Указываем, что на вход подаётся именно набор записей
+        )
+        return Response(serializer_for_queryset.data)
+
+
+class GetTaskInfoView(APIView):
+    def get(self, request):
+        # Получаем набор всех записей из таблицы Capital
+        queryset = Task.objects.all()
+        # Сериализуем извлечённый набор записей
+        serializer_for_queryset = TaskSerializer(
+            instance=queryset, # Передаём набор записей
+            many=True # Указываем, что на вход подаётся именно набор записей
+        )
+        return Response(serializer_for_queryset.data)
+
+
+class GetUserInfoView(APIView):
+    def get(self, request):
+        # Получаем набор всех записей из таблицы Capital
+        queryset = User.objects.all()
+        # Сериализуем извлечённый набор записей
+        serializer_for_queryset = UserSerializer(
+            instance=queryset, # Передаём набор записей
+            many=True # Указываем, что на вход подаётся именно набор записей
+        )
+        return Response(serializer_for_queryset.data)
+
