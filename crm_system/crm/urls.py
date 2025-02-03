@@ -3,7 +3,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 from rest_framework.routers import DefaultRouter
 from rest_framework import routers, serializers, viewsets
-from .views import client_list, client_detail
+from .views import client_list, client_detail, deal_list, deal_detail, task_list, task_detail, user_list, user_detail
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -39,8 +39,13 @@ urlpatterns = [
     # path('users/', UserView.as_view({'get': 'list'})),
     # path('users/<int:pk>', UserView.as_view({'get': 'retrieve'})),
     path('clients/', views.client_list),
-    path('clients/<int:pk>/', views.client_detail)
-
+    path('clients/<int:pk>/', views.client_detail),
+    path('deals/', views.deal_list),
+    path('deals/<int:pk>/', views.deal_detail),
+    path('tasks/', views.task_list),
+    path('tasks/<int:pk>/', views.task_detail),
+    path('users/', views.user_list),
+    path('users/<int:pk>/', views.user_detail)
 ]
 
 
