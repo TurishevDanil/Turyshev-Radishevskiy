@@ -24,7 +24,7 @@ from .models import Client
 #     address = serializers.CharField(allow_null=True)
 
 
-class ClientSerializer(serializers.ModelSerializer):
+class ClientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Client
         fields = ('id','name', 'surname', 'birth_date', 'email', 'phone', 'address')

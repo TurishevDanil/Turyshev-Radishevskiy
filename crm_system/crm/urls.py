@@ -1,8 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import   TaskViewSet, DealViewSet, UserViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework import routers, serializers, viewsets
+from .views import ClientViewSet, DealViewSet, TaskViewSet, UserViewSet
+
+router = routers.DefaultRouter()
+router.register(r'clients', ClientViewSet)
+router.register(r'deals', DealViewSet)
+router.register(r'tasks', TaskViewSet)
+router.register(r'users', UserViewSet)
 
 
 urlpatterns = [
@@ -16,7 +23,7 @@ urlpatterns = [
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logged_out/', auth_views.LogoutView.as_view(), name='logged_out'),
-    path('clients/', views.client_list, name='client_list'),
+    path('clientss/', views.client_list, name='client_list'),
     path('clients/add/', views.add_client, name='add_client'),
     path('clients/delete/<int:client_id>/', views.delete_client, name='delete_client'),
     path('clients/edit/<int:client_id>/', views.edit_client, name='edit_client'),
@@ -32,17 +39,15 @@ urlpatterns = [
     # path('users/<int:pk>', SingleUserView.as_view()),
     # path('tasks/<int:pk>', SingleTaskView.as_view()),
     # path('deals/<int:pk>', SingleDealView.as_view()),
-    path('api/clients/', views.GetClientInfoView.as_view()),
-    path('api/deals/', views.GetDealInfoView.as_view()),
-    path('api/tasks/', views.GetTaskInfoView.as_view()),
-    path('api/users/', views.GetUserInfoView.as_view()),
+    # path('api/clients/', views.GetClientInfoView.as_view()),
+    # path('api/deals/', views.GetDealInfoView.as_view()),
+    # path('api/tasks/', views.GetTaskInfoView.as_view()),
+    # path('api/users/', views.GetUserInfoView.as_view()),
     # path('users/', UserView.as_view({'get': 'list'})),
     # path('users/<int:pk>', UserView.as_view({'get': 'retrieve'})),
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
 ]
-# router = DefaultRouter()
-# router.register(r'users', UserViewSet, basename='user')
-# router.register(r'tasks', TaskViewSet, basename='task')
-# router.register(r'deals', DealViewSet, basename='deal')
-# router.register(r'clients', ClientViewSet, basename='client')
-# urlpatterns = router.urls
+
 

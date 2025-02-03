@@ -2,9 +2,7 @@ from django.shortcuts import render
 from .models import Client, Deal, Task, User
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client
-from .forms import ClientForm
 from django.contrib.auth.decorators import login_required
-from .forms import TaskForm
 from rest_framework import viewsets
 from .models import Client
 from .Serializer_clients import ClientSerializer
@@ -243,66 +241,49 @@ def edit_client(request, client_id):
 #     serializer_class = ClientSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+# class UserViewSet(viewsets.ModelViewSet):
+#     serializer_class = UserSerializer
+#     queryset = User.objects.all()
 
-class TaskViewSet(viewsets.ModelViewSet):
-    serializer_class = TaskSerializer
-    queryset = Task.objects.all()
+# class TaskViewSet(viewsets.ModelViewSet):
+#     serializer_class = TaskSerializer
+#     queryset = Task.objects.all()
 
-class DealViewSet(viewsets.ModelViewSet):
-    serializer_class = DealSerializer
-    queryset = Deal.objects.all()
+# class DealViewSet(viewsets.ModelViewSet):
+#     serializer_class = DealSerializer
+#     queryset = Deal.objects.all()
 
 # class ClientViewSet(viewsets.ModelViewSet):
 #     serializer_class = ClientSerializer
 #     queryset = Client.objects.all()
 
-class GetClientInfoView(APIView):
-    def get(self, request):
-        # Получаем набор всех записей из таблицы Capital
-        queryset = Client.objects.all()
-        # Сериализуем извлечённый набор записей
-        serializer_for_queryset = ClientSerializer(
-            instance=queryset, # Передаём набор записей
-            many=True # Указываем, что на вход подаётся именно набор записей
-        )
-        return Response(serializer_for_queryset.data)
+# class GetClientInfoView(APIView):
+#     def get(self, request):
+#         # Получаем набор всех записей из таблицы Capital
+#         queryset = Client.objects.all()
+#         # Сериализуем извлечённый набор записей
+#         serializer_for_queryset = ClientSerializer(
+#             instance=queryset, # Передаём набор записей
+#             many=True # Указываем, что на вход подаётся именно набор записей
+#         )
+#         return Response(serializer_for_queryset.data)
     
 
-class GetDealInfoView(APIView):
-    def get(self, request):
-        # Получаем набор всех записей из таблицы Capital
-        queryset = Deal.objects.all()
-        # Сериализуем извлечённый набор записей
-        serializer_for_queryset = DealSerializer(
-            instance=queryset, # Передаём набор записей
-            many=True # Указываем, что на вход подаётся именно набор записей
-        )
-        return Response(serializer_for_queryset.data)
+class ClientViewSet(viewsets.ModelViewSet):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
 
 
-class GetTaskInfoView(APIView):
-    def get(self, request):
-        # Получаем набор всех записей из таблицы Capital
-        queryset = Task.objects.all()
-        # Сериализуем извлечённый набор записей
-        serializer_for_queryset = TaskSerializer(
-            instance=queryset, # Передаём набор записей
-            many=True # Указываем, что на вход подаётся именно набор записей
-        )
-        return Response(serializer_for_queryset.data)
+class DealViewSet(viewsets.ModelViewSet):
+    queryset = Deal.objects.all()
+    serializer_class = DealSerializer
 
 
-class GetUserInfoView(APIView):
-    def get(self, request):
-        # Получаем набор всех записей из таблицы Capital
-        queryset = User.objects.all()
-        # Сериализуем извлечённый набор записей
-        serializer_for_queryset = UserSerializer(
-            instance=queryset, # Передаём набор записей
-            many=True # Указываем, что на вход подаётся именно набор записей
-        )
-        return Response(serializer_for_queryset.data)
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
