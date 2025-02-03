@@ -1,9 +1,9 @@
 from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
-from rest_framework.routers import DefaultRouter
-from rest_framework import routers, serializers, viewsets
-from .views import client_list, client_detail, deal_list, deal_detail, task_list, task_detail, user_list, user_detail
+from rest_framework import  serializers
+
+
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -38,14 +38,15 @@ urlpatterns = [
     # path('api/users/', views.GetUserInfoView.as_view()),
     # path('users/', UserView.as_view({'get': 'list'})),
     # path('users/<int:pk>', UserView.as_view({'get': 'retrieve'})),
-    path('clients/', views.client_list),
-    path('clients/<int:pk>/', views.client_detail),
-    path('deals/', views.deal_list),
-    path('deals/<int:pk>/', views.deal_detail),
-    path('tasks/', views.task_list),
-    path('tasks/<int:pk>/', views.task_detail),
-    path('users/', views.user_list),
-    path('users/<int:pk>/', views.user_detail)
+    path('clients/', views.ClientList.as_view()),
+    path('clients/<int:pk>/', views.ClientDetail.as_view()),
+    path('deals/', views.DealList.as_view()),
+    path('deals/<int:pk>/', views.DealList.as_view()),
+    path('tasks/', views.TaskList.as_view()),
+    path('tasks/<int:pk>/', views.TaskDetail.as_view()),
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view())
 ]
+
 
 

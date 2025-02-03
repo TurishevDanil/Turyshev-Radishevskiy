@@ -3,11 +3,12 @@ from .models import Client, Deal, Task, User
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Client
 from django.contrib.auth.decorators import login_required
-from rest_framework import viewsets
+from rest_framework import  generics
 from .models import Client
 from .Serializer_clients import ClientSerializer
 from rest_framework.views import APIView, Response
 from .Serializer_tasks import TaskSerializer
+from django.http import Http404
 from .Serializer_deals import DealSerializer
 from .Serializer_users import UserSerializer
 from django.contrib.auth.hashers import make_password
@@ -291,158 +292,39 @@ def edit_client(request, client_id):
 #     queryset = User.objects.all()
 #     serializer_class = UserSerializer
 
-def client_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        clients = Client.objects.all()
-        serializer = ClientSerializer(clients, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ClientSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class ClientList(generics.ListCreateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
     
-def client_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        client = Client.objects.get(pk=pk)
-    except Client.DoesNotExist:
-        return HttpResponse(status=404)
-    if request.method == 'GET':
-        serializer = ClientSerializer(client)
-        return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = ClientSerializer(client, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-        client.delete()
-        return HttpResponse(status=204)
+class ClientDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+
+
+
+class DealList(generics.ListCreateAPIView):
+    queryset = Deal.objects.all()
+    serializer_class = DealSerializer
+    
+class DealDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Deal.objects.all()
+    serializer_class = DealSerializer
     
 
-def deal_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        deals = Deal.objects.all()
-        serializer = DealSerializer(deals, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = DealSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class TaskList(generics.ListCreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
     
-def deal_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        deal = Deal.objects.get(pk=pk)
-    except Deal.DoesNotExist:
-        return HttpResponse(status=404)
-    if request.method == 'GET':
-        serializer = DealSerializer(deal)
-        return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = DealSerializer(deal, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-        deal.delete()
-        return HttpResponse(status=204)
+class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
     
 
-def task_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        tasks = Task.objects.all()
-        serializer = TaskSerializer(tasks, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = TaskSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     
-def task_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        task = Task.objects.get(pk=pk)
-    except Task.DoesNotExist:
-        return HttpResponse(status=404)
-    if request.method == 'GET':
-        serializer = TaskSerializer(task)
-        return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = TaskSerializer(task, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-        task.delete()
-        return HttpResponse(status=204)
-    
-
-def user_list(request):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    if request.method == 'GET':
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return JsonResponse(serializer.data, safe=False)
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
-    
-def user_detail(request, pk):
-    """
-    Retrieve, update or delete a code snippet.
-    """
-    try:
-        user = User.objects.get(pk=pk)
-    except User.DoesNotExist:
-        return HttpResponse(status=404)
-    if request.method == 'GET':
-        serializer = UserSerializer(user)
-        return JsonResponse(serializer.data)
-    elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = UserSerializer(user, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-        user.delete()
-        return HttpResponse(status=204)
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
     
