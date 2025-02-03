@@ -28,3 +28,4 @@ class ClientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Client
         fields = ('id','name', 'surname', 'birth_date', 'email', 'phone', 'address')
+

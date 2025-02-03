@@ -14,6 +14,9 @@ from django.contrib.auth.hashers import make_password
 from django.db import IntegrityError
 from rest_framework.generics import GenericAPIView
 from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
+from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
 
 
 
@@ -269,21 +272,176 @@ def edit_client(request, client_id):
 #         return Response(serializer_for_queryset.data)
     
 
-class ClientViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+# class ClientViewSet(viewsets.ModelViewSet):
+#     queryset = Client.objects.all()
+#     serializer_class = ClientSerializer
 
 
-class DealViewSet(viewsets.ModelViewSet):
-    queryset = Deal.objects.all()
-    serializer_class = DealSerializer
+# class DealViewSet(viewsets.ModelViewSet):
+#     queryset = Deal.objects.all()
+#     serializer_class = DealSerializer
 
 
-class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+# class TaskViewSet(viewsets.ModelViewSet):
+#     queryset = Task.objects.all()
+#     serializer_class = TaskSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+def client_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        clients = Client.objects.all()
+        serializer = ClientSerializer(clients, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+def client_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        client = Client.objects.get(pk=pk)
+    except Client.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = ClientSerializer(client)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(client, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'DELETE':
+        client.delete()
+        return HttpResponse(status=204)
+    
+
+def deal_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        deals = Deal.objects.all()
+        serializer = DealSerializer(deals, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = DealSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+def deal_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        deal = deal.objects.get(pk=pk)
+    except Deal.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = DealSerializer(deal)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = DealSerializer(deal, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'DELETE':
+        deal.delete()
+        return HttpResponse(status=204)
+    
+
+def client_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Client.objects.all()
+        serializer = ClientSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+def client_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        snippet = Client.objects.get(pk=pk)
+    except Client.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = ClientSerializer(snippet)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(snippet, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return HttpResponse(status=204)
+    
+
+def client_list(request):
+    """
+    List all code snippets, or create a new snippet.
+    """
+    if request.method == 'GET':
+        snippets = Client.objects.all()
+        serializer = ClientSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+def client_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        snippet = Client.objects.get(pk=pk)
+    except Client.DoesNotExist:
+        return HttpResponse(status=404)
+    if request.method == 'GET':
+        serializer = ClientSerializer(snippet)
+        return JsonResponse(serializer.data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ClientSerializer(snippet, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return HttpResponse(status=204)

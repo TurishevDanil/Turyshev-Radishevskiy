@@ -24,5 +24,5 @@ from rest_framework import routers, serializers, viewsets
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('crm.urls')),  # Подключаем маршрут приложения
-    # path('api/', include('crm.urls')),
+    path('api/', include('crm.urls')),
 ]
