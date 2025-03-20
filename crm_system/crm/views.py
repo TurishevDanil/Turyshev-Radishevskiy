@@ -18,6 +18,11 @@ from rest_framework.generics import ListCreateAPIView,  RetrieveUpdateAPIView, R
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework import renderers, reverse
+from rest_framework.decorators import api_view
+from .models import Client, Deal, Task, User
+   
+   
 
 from .permissions import IsOwnerOrReadOnly
 from django.contrib.auth.forms import UserCreationForm
@@ -346,3 +351,17 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsOwnerOrReadOnly]
 
+
+@api_view(['GET'])
+def apiroot(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'clients': reverse('client-list', request=request, format=format),
+    })
+
+class ClientHighlight(generics.GenericAPIView):
+ queryset = Client.objects.all()
+ renderer_classes = [renderers.StaticHTMLRenderer]
+ def get(self, request, *args, **kwargs):
+    client = self.get_object()
+    return Response(client.highlighted)

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Client
+from .models import Client, User
+
 
 # class ClientSerializer(serializers.ModelSerializer):
 #     name = serializers.CharField(max_length=255)
@@ -24,8 +25,20 @@ from .models import Client
 #     address = serializers.CharField(allow_null=True)
 
 
+# class ClientSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Client
+#         fields = ('id','name', 'surname', 'birth_date', 'email', 'phone', 'address')
+
 class ClientSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Client
-        fields = ('id','name', 'surname', 'birth_date', 'email', 'phone', 'address')
+        fields = ('id','name', 'surname', 'birth_date', 'email', 'phone', 'address', 'owner',)
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username') 
+    class Meta:
+     model = User
+     fields = ['id','login', 'first_name', 'last_name', 'email', 'password', 'owner']
 

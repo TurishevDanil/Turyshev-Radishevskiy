@@ -15,8 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from crm import views
+
 from django.urls import path, include
-from rest_framework import routers, serializers, viewsets
+# from rest_framework import routers, serializers, viewsets
 
 
 
@@ -25,4 +27,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('crm.urls')),  # Подключаем маршрут приложения
     path('api/', include('crm.urls')),
+    path('', views.apiroot),
 ]
